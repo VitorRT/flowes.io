@@ -27,7 +27,7 @@ RM 95189: Pedro Luiz Santiago Santana
 <!-- Colocar a versão é importante para compatibilidade  --> 
 **Exemplo de Entrada** 
 
-```json
+```js
 {
     "client_id": 2,
     "name": "FIAP WORKSPACE",
@@ -64,7 +64,7 @@ workspace_photo|não|imagem|Uma foto da sua workspace
 `GET` - **flowes/api/v1/workspace/{id}**
 
 **Exemplo de Resposta** 
-```json
+```js
 {
      "client":{
         "id": 2,
@@ -95,7 +95,7 @@ workspace_photo|não|imagem|Uma foto da sua workspace
 `GET` - **flowes/api/v1/workspace**
 
 **Exemplo de Resposta** 
-```json
+```js
 [
     {
          "client":{
@@ -127,7 +127,7 @@ workspace_photo|não|imagem|Uma foto da sua workspace
 `PUT` - **flowes/api/v1/workspace/{id}**
 
 **Campos da Requisição** 
-```json
+```js
 {
     "name": "FIAP WORKS",
     "deadline": "2023-05-08",
@@ -148,7 +148,7 @@ createdAt | Não | Esse campo é gerado automaticamente pelo sistema, uma vez ge
 |updatedAt | Não | Esse campo não é editável por você, o próprio sistema o altera a cada atualização.
 
 **Exemplo de Resposta** 
-```json
+```js
 {
      "client":{
         "id": 2,
@@ -179,7 +179,7 @@ createdAt | Não | Esse campo é gerado automaticamente pelo sistema, uma vez ge
 `DELETE` - **flowes/api/v1/workspace/{id}**
 
 **Exemplo de Resposta** 
-```json
+```js
 {
      "status": 204,
      "message": "Workspace deletada com sucesso!"

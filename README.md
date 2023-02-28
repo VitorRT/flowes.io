@@ -29,13 +29,13 @@ RM 95189: Pedro Luiz Santiago Santana
 
 ```js
 {
-    "client_id": 2,
-    "name": "FIAP WORKSPACE",
-    "deadline": "2023-01-01",
-    "description": "Espaço de trabalho para serviços da FIAP",
-    "workspace_photo": "fiap_img.png",
-    "createdAt": "2022-12-10", /* Gerado automaticamente */
-    "updatedAt": "2022-12-10"  /* Gerado automaticamente */
+    client_id: 2,
+    name: "FIAP WORKSPACE",
+    deadline: "2023-01-01",
+    description: "Espaço de trabalho para serviços da FIAP",
+    workspace_photo: "fiap_img.png",
+    createdAt: "2022-12-10", /* Gerado automaticamente */
+    updatedAt: "2022-12-10"  /* Gerado automaticamente */
 }
 ```
 ### **Campos da Requisição**
@@ -66,16 +66,16 @@ workspace_photo|não|imagem|Uma foto da sua workspace
 **Exemplo de Resposta** 
 ```js
 {
-     "client":{
-        "id": 2,
-        "name": "Vitor"
+     client:{
+        id: 2,
+        name: "Vitor"
     },
-    "name": "FIAP WORKSPACE",
-    "deadline": "2023-01-01",
-    "description": "Espaço de trabalho para serviços da FIAP",
-    "workspace_photo": "fiap_img.png",
-    "createdAt": "2022-12-10",
-    "updatedAt": "2022-12-10"
+    name: "FIAP WORKSPACE",
+    deadline: "2023-01-01",
+    description: "Espaço de trabalho para serviços da FIAP",
+    workspace_photo: "fiap_img.png",
+    createdA: "2022-12-10",
+    updatedAt: "2022-12-10"
 }
 ```
 ### **Códigos da Resposta**
@@ -98,16 +98,16 @@ workspace_photo|não|imagem|Uma foto da sua workspace
 ```js
 [
     {
-         "client":{
-            "id": 2,
-            "name": "Vitor"
+         client:{
+            id: 2,
+            name: "Vitor"
         },
-        "name": "FIAP WORKSPACE",
-        "deadline": "2023-01-01",
-        "description": "Espaço de trabalho para serviços da FIAP",
-        "workspace_photo": "fiap_img.png",
-        "createdAt": "2022-12-10",
-        "updatedAt": "2022-12-10",
+        name: "FIAP WORKSPACE",
+        deadline: "2023-01-01",
+        description: "Espaço de trabalho para serviços da FIAP",
+        workspace_photo: "fiap_img.png",
+        createdAt: "2022-12-10",
+        updatedAt: "2022-12-10",
     },
 ]
 ```
@@ -129,10 +129,10 @@ workspace_photo|não|imagem|Uma foto da sua workspace
 **Campos da Requisição** 
 ```js
 {
-    "name": "FIAP WORKS",
-    "deadline": "2023-05-08",
-    "description": "Espaço de trabalho para serviços da FIAP",
-    "workspace_photo": "fiap_img2.png",
+    name: "FIAP WORKS",
+    deadline: "2023-05-08",
+    description: "Espaço de trabalho para serviços da FIAP",
+    workspace_photo: "fiap_img2.png",
 }
 ```
 **Regras de Negócio - Edição de Workspace**
@@ -150,16 +150,16 @@ createdAt | Não | Esse campo é gerado automaticamente pelo sistema, uma vez ge
 **Exemplo de Resposta** 
 ```js
 {
-     "client":{
-        "id": 2,
-        "name": "Vitor"
+     client:{
+        id: 2,
+        name: "Vitor"
     },
-    "name": "FIAP WORKS",
-    "deadline": "2023-05-08",
-    "description": "Espaço de trabalho para serviços da FIAP",
-    "workspace_photo": "fiap_img.png",
-    "createdAt": "2022-12-10",
-    "updatedAt": "2023-01-02",
+    name: "FIAP WORKS",
+    deadline: "2023-05-08",
+    description: "Espaço de trabalho para serviços da FIAP",
+    workspace_photo: "fiap_img2.png",
+    createdAt: "2022-12-10",
+    updatedAt: "2023-01-02"
 }
 ```
 
@@ -181,8 +181,8 @@ createdAt | Não | Esse campo é gerado automaticamente pelo sistema, uma vez ge
 **Exemplo de Resposta** 
 ```js
 {
-     "status": 204,
-     "message": "Workspace deletada com sucesso!"
+     status: 204,
+     message: "Workspace deletada com sucesso!"
 }
 ```
 

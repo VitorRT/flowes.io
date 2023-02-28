@@ -300,3 +300,6 @@ createdAt | Não | Esse campo é gerado automaticamente pelo sistema, uma vez ge
 |--------|------------------------------------------|
 |204     | A workspace foi deletada com sucesso.    |
 |400     | Não existe uma workspace com esse ID.    |
+
+<br/>
+> A Documentação ainda está sendo feita 📝 <br/>  Projeto em Desenvolvimento... 🏗

@@ -129,6 +129,13 @@ data_nascimento|sim|data|A data de nascimento do cliente.
     },
 ]
 ```
+### **Códigos da Resposta**
+
+| Código | Descrição                                |
+|--------|------------------------------------------|
+|200     | Os dados dos clientes foram retornados.  |
+
+
 --- 
 
 
@@ -146,6 +153,7 @@ data_nascimento|sim|data|A data de nascimento do cliente.
     data_nascimento: "24/03/2004"
 }
 ```
+
 **Regras de Negócio - Edição de Client**
 
 | Campos    | Editável | Considerações |
@@ -157,6 +165,21 @@ data_nascimento|sim|data|A data de nascimento do cliente.
 |createdAt  |Não        |O Cliente não poderá editar este campo, ele é gerado automaticamente pelo sistema e permanecerá assim para sempre.
 |updatedAt  |Não       |O Cliente não poderá editar este campo, porém ele é atualizado pelo sistema a cada requisição put.
 
+**Exemplo de Resposta** 
+```js
+{
+    id: 2,
+    client_name: "Vituu 🌙",
+    email: "vitu.barberino@gmail.com",
+    senha: "outrasenha123",
+    data_nascimento: "24/03/2004",
+    createdAt: "10/12/2022",
+    updatedAt: "11/12/2022"  
+}
+```
+
+<br/>
+<br/>
 
 ---
 
@@ -169,7 +192,7 @@ data_nascimento|sim|data|A data de nascimento do cliente.
 ```js
 {
      status: 204,
-     message: "Workspace deletada com sucesso!"
+     message: "Cliente deletado com sucesso!"
 }
 ```
 
@@ -177,8 +200,8 @@ data_nascimento|sim|data|A data de nascimento do cliente.
 
 | Código | Descrição                                |
 |--------|------------------------------------------|
-|204     | A workspace foi deletada com sucesso.    |
-|400     | Não existe uma workspace com esse ID.    |
+|204     | O cliente foi deletada com sucesso.    |
+|400     | Não existe um cliente com esse ID.    |
 
 
 </br>
@@ -232,6 +255,7 @@ workspace_photo|não|imagem|Uma foto da sua workspace
 **Exemplo de Resposta** 
 ```js
 {
+    id: 1,
      client:{
         id: 2,
         name: "Vitor"
@@ -264,6 +288,7 @@ workspace_photo|não|imagem|Uma foto da sua workspace
 **Exemplo de Resposta** 
 ```js
 {
+    id: 1,
      client:{
         id: 2,
         name: "Vitor"
@@ -295,7 +320,8 @@ workspace_photo|não|imagem|Uma foto da sua workspace
 **Exemplo de Resposta** 
 ```js
 [
-    {
+    {   
+        id: 1,
          client:{
             id: 2,
             name: "Vitor"
@@ -309,6 +335,13 @@ workspace_photo|não|imagem|Uma foto da sua workspace
     },
 ]
 ```
+
+### **Códigos da Resposta**
+
+| Código | Descrição                                |
+|--------|------------------------------------------|
+|200     | Os dados das workspaces foram retornados.  |
+
 
 ---
 
@@ -330,17 +363,16 @@ workspace_photo|não|imagem|Uma foto da sua workspace
 
 | Campos    | Editável | Considerações |
 |-----------|----------|---------------|
-| client_id | Não      | Uma workspace sempre pertencerá unicamente a uma conta.|
 | name      | Sim      | Para caso você tenha escrevido errado ou simplesmente queira mudar. 
 | deadline  | Sim      | Para caso você não tenha conseguido atingir o prazo ou queira estender ou diminuir o prazo.
 |description | Sim | Para caso você queira mudar a descrição que não tenha te agradado.
 workspace_photo | Sim  | Para caso você queira alterar a foto atual da sua workspace.
-createdAt | Não | Esse campo é gerado automaticamente pelo sistema, uma vez gerado jamais poderá ser alterado.
-|updatedAt | Não | Esse campo não é editável por você, o próprio sistema o altera a cada atualização.
+
 
 **Exemplo de Resposta** 
 ```js
 {
+    id: 1,
      client:{
         id: 2,
         name: "Vitor"
@@ -446,5 +478,257 @@ createdAt | Não | Esse campo é gerado automaticamente pelo sistema, uma vez ge
 |end_hour|Sim|Texto|Horário de término do projeto.
 |label|Sim|Texto|Cor em hexadecimal da label do projeto
 |description|Não|Texto|Uma breve descrição do projeto.
+
+
+
+**Exemplo de Resposta** 
+
+```js
+{
+    id: 1,
+    workspace: {
+        id: 1,
+        name: "João Carlos Workspace"
+    },
+    name: "Nubeck Project",
+    deadline: {
+        start: {
+            start_date: "22/05/2022",
+            start_hours: "09:00",
+        },
+        end: {
+            end_date: "25/05/2022",
+            end_hours: "09:00"
+        }
+    },
+    label: "#AEEBB4",
+    description: "Tarefas do projeto nubeck.",
+    createdAt: "10/04/2022",
+    updatedAt: "10/04/2022"
+}
+```
+
+### **Códigos da Resposta**
+
+| Código | Descrição                            |
+|--------|--------------------------------------|
+|201     | O projeto foi criado com sucesso.    |
+|400     | Os dados enviados são inválidos.     |
+
+
+---
+
+
+## Detalhar Project 📋
+
+<!-- Endereço do recurso -->
+`GET` - **flowes/api/v1/project/{id}**
+
+**Exemplo de Resposta** 
+
+```js
+{
+    id: 1,
+    workspace: {
+        id: 1,
+        name: "João Carlos Workspace"
+    },
+    name: "Nubeck Project",
+    deadline: {
+        start: {
+            start_date: "22/05/2022",
+            start_hours: "09:00",
+        },
+        end: {
+            end_date: "25/05/2022",
+            end_hours: "09:00"
+        }
+    },
+    label: "#AEEBB4",
+    description: "Tarefas do projeto nubeck.",
+    createdAt: "10/04/2022",
+    updatedAt: "10/04/2022"
+}
+```
+### **Códigos da Resposta**
+
+| Código | Descrição                            |
+|--------|--------------------------------------|
+|200     | Os dados do projeto foram retornados.|
+|400     | Não existe um projeto com esse ID.   | 
+
+
+
+---
+
+## Listar Project 📋
+
+<!-- Endereço do recurso -->
+`GET` - **flowes/api/v1/project**
+
+**Exemplo de Resposta** 
+
+```js
+[
+    {
+        id: 1,
+        workspace: {
+            id: 1,
+            name: "João Carlos Workspace"
+        },
+        name: "Nubeck Project",
+        deadline: {
+            start: {
+                start_date: "22/05/2022",
+                start_hours: "09:00",
+            },
+            end: {
+                end_date: "25/05/2022",
+                end_hours: "09:00"
+            }
+        },
+        label: "#AEEBB4",
+        description: "Tarefas do projeto nubeck.",
+        createdAt: "10/04/2022",
+        updatedAt: "10/04/2022"
+    },
+    {
+        id: 2,
+        workspace: {
+            id: 1,
+            name: "João Carlos Workspace"
+        },
+        name: "Nubeck Project Seasson 2",
+        deadline: {
+            start: {
+                start_date: "22/06/2022",
+                start_hours: "09:00",
+            },
+            end: {
+                end_date: "25/06/2022",
+                end_hours: "09:00"
+            }
+        },
+        label: "#F4D1A8",
+        description: "Tarefas do projeto nubeck.",
+        createdAt: "10/04/2022",
+        updatedAt: "10/04/2022"
+    }
+]
+```
+
+### **Códigos da Resposta**
+
+| Código | Descrição                                |
+|--------|------------------------------------------|
+|200     | Os dados do projeto foram retornados.  |
+
+
+---
+
+## Editar Project ⚙
+
+<!-- Endereço do recurso -->
+`PUT` - **flowes/api/v1/project/{id}**
+
+```js
+{
+    name: "Nubeck Project 💵",
+    deadline: {
+        start: {
+            start_date: "22/05/2022",
+            start_hours: "09:00",
+        },
+        end: {
+            end_date: "25/05/2022",
+            end_hours: "09:00"
+        }
+    },
+    label: "#AEEBB4",
+    description: "Tarefas do projeto nubeck.",
+}
+```
+
+**Regras de Negócio - Edição de Project**
+
+| Campos    | Editável | Considerações |
+|-----------|----------|---------------|
+|name       |Sim       |O nome do projeto será editável, caso o usuário não tenha gostado.
+|deadline   |Sim       | O objeto que contém os dados da deadline é editável, caso o usuário queira mudar o prazo.
+|start|Sim|O objeto da data de início é editável, caso o usuário queira mudar a data ou a hora.
+|end|Sim|O objeto da data de término é editável, caso o usuário queira mudar a data ou a hora.
+|start_date|Sim|Esse campo é editável, caso o usuário queira alterar a data de inicio.
+|start_hours|Sim|Esse campo é esitável, caso o usuário queira alterar a hora de início.
+|end_date|Sim|Esse campo é término, caso o usuário queira alterar a data de inicio.
+|end_hours|Sim|Esse campo é editável, caso o usuário queira alterar a hora de término.
+
+
+**Exemplo de Resposta**
+```js
+{   
+    id: 1,
+    workspace: {
+            id: 1,
+            name: "João Carlos Workspace"
+        },
+    name: "Nubeck Project 💵",
+    deadline: {
+        start: {
+            start_date: "22/06/2022",
+            start_hours: "09:00",
+        },
+        end: {
+            end_date: "25/06/2022",
+            end_hours: "09:00"
+        }
+    },
+    label: "#F4D1A8",
+    description: "Tarefas do projeto nubeck.",
+    createdAt: "10/04/2022",
+    updatedAt: "10/04/2022"
+}
+```
+
+### **Códigos da Resposta**
+
+| Código | Descrição                                |
+|--------|------------------------------------------|
+|200     | Os dados do projeto foram retornados.  |
+|400     | Não existe uma projeto com esse ID.    |
+
+
+---
+
+## Deletar Project 🗑
+
+<!-- Endereço do recurso -->
+`DELETE` - **flowes/api/v1/project/{id}**
+
+**Exemplo de Resposta** 
+```js
+{
+     status: 204,
+     message: "Project deletada com sucesso!"
+}
+```
+
+### **Códigos da Resposta**
+
+| Código | Descrição                                |
+|--------|------------------------------------------|
+|204     | O Projeto foi deletada com sucesso.    |
+|400     | Não existe um projeto com esse ID.    |
+
+</br>
+</br>
+</br>
+
+---
+
+</br>
+</br>
+</br> 
+
+
 
 > A Documentação ainda está sendo feita 📝 <br/>  Projeto em Desenvolvimento... 🏗

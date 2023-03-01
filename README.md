@@ -178,6 +178,13 @@ data_nascimento|sim|data|A data de nascimento do cliente.
 }
 ```
 
+### **Códigos da Resposta**
+
+| Código | Descrição                                |
+|--------|------------------------------------------|
+|200     | Os dados do cliente foram retornados.  |
+|400     | Não existe um cliente com esse ID.    |
+
 <br/>
 <br/>
 

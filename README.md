@@ -101,6 +101,89 @@ data_nascimento|sim|data|A data de nascimento do cliente.
 </br>
 </br>
 
+---
+
+## Listar Client 📋
+
+<!-- Endereço do recurso -->
+`GET` - **flowes/api/v1/client**
+
+**Exemplo de Resposta** 
+```js
+[
+    {
+        id: 1,
+        client_name: "Yukari",
+        email: "brunayuuki@gmail.com",
+        senha: "exemplo123",
+        data_nascimento: "05/03/2004",
+        createdAt: "10/12/2022",
+        updatedAt: "10/12/2022"  
+    },
+    {
+        id: 2,
+        client_name: "Vitor",
+        email: "vitu.barberino@gmail.com",
+        senha: "exemplo123",
+        data_nascimento: "24/03/2004",
+        createdAt: "10/12/2022",
+        updatedAt: "10/12/2022"  
+    },
+]
+```
+--- 
+
+
+## Editar Client ⚙
+
+<!-- Endereço do recurso -->
+`PUT` - **flowes/api/v1/client/{id}**
+
+**Campos da Requisição** 
+```js
+{
+    client_name: "Vituu 🌙",
+    email: "vitu.barberino@gmail.com",
+    senha: "outrasenha123",
+    data_nascimento: "24/03/2004",
+    createdAt: "10/12/2022",
+    updatedAt: "10/12/2022" /* atualizado automaticamente */ 
+}
+```
+**Regras de Negócio - Edição de Client**
+
+| Campos    | Editável | Considerações |
+|-----------|----------|---------------|
+|client_name|Sim       |O cliente poderá alterar seu nome caso não tenha gostado.
+|email      |Não       |O email não poderá ser alterado, é algo unico que o identifica no sistema. 
+|senha      |Sim       |A senha é editável e o cliente poderá editar caso tenha esquecido sua antiga senha.
+|data_nascimento|Sim    |A data de nascimento também é editável, caso o cliente tenha colocado uma data errada o mesmo poderá altera-la.
+|createdAt  |Não        |O Cliente não poderá editar este campo, ele é gerado automaticamente pelo sistema e permanecerá assim para sempre.
+|updatedAt  |Não       |O Cliente não poderá editar este campo, porém ele é atualizado pelo sistema a cada requisição put.
+
+
+---
+
+## Deletar Client 🗑
+
+<!-- Endereço do recurso -->
+`DELETE` - **flowes/api/v1/client/{id}**
+
+**Exemplo de Resposta** 
+```js
+{
+     status: 204,
+     message: "Workspace deletada com sucesso!"
+}
+```
+
+### **Códigos da Resposta**
+
+| Código | Descrição                                |
+|--------|------------------------------------------|
+|204     | A workspace foi deletada com sucesso.    |
+|400     | Não existe uma workspace com esse ID.    |
+
 <!-- Listagem dos endpoints -->
 # Endpoints - WorkSpace 💻
 - Criar workspaces
@@ -219,17 +302,10 @@ workspace_photo|não|imagem|Uma foto da sua workspace
     },
 ]
 ```
-### **Códigos da Resposta**
-
-| Código | Descrição                                |
-|--------|------------------------------------------|
-|200     | Os dados da workspace foram retornados.  |
-|400     | Não existe uma workspace com esse ID.    |
-
 
 ---
 
-## Editar WorkSpaces 📋
+## Editar WorkSpaces ⚙
 
 <!-- Endereço do recurso -->
 `PUT` - **flowes/api/v1/workspace/{id}**
@@ -281,7 +357,7 @@ createdAt | Não | Esse campo é gerado automaticamente pelo sistema, uma vez ge
 
 ---
 
-## Deletar WorkSpaces 📋
+## Deletar WorkSpaces 🗑
 
 <!-- Endereço do recurso -->
 `DELETE` - **flowes/api/v1/workspace/{id}**

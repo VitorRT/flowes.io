@@ -245,9 +245,7 @@ data_nascimento|sim|data|A data de nascimento do cliente.
     name: "FIAP WORKSPACE",
     deadline: "2023-01-01",
     description: "Espaço de trabalho para serviços da FIAP",
-    workspace_photo: "fiap_img.png",
-    createdAt: "2022-12-10", /* Gerado automaticamente */
-    updatedAt: "2022-12-10"  /* Gerado automaticamente */
+    workspace_photo: "fiap_img.png"
 }
 ```
 ### **Campos da Requisição**

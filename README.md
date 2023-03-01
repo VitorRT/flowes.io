@@ -33,9 +33,7 @@
     client_name: "Yukari",
     email: "brunayuuki@gmail.com",
     senha: "exemplo123",
-    data_nascimento: "05/03/2004",
-    createdAt: "10/12/2022", /* Gerado automaticamente */
-    updatedAt: "10/12/2022"  /* Gerado automaticamente */
+    data_nascimento: "05/03/2004"
 }
 ```
 
@@ -145,9 +143,7 @@ data_nascimento|sim|data|A data de nascimento do cliente.
     client_name: "Vituu 🌙",
     email: "vitu.barberino@gmail.com",
     senha: "outrasenha123",
-    data_nascimento: "24/03/2004",
-    createdAt: "10/12/2022",
-    updatedAt: "10/12/2022" /* atualizado automaticamente */ 
+    data_nascimento: "24/03/2004"
 }
 ```
 **Regras de Negócio - Edição de Client**
@@ -183,6 +179,17 @@ data_nascimento|sim|data|A data de nascimento do cliente.
 |--------|------------------------------------------|
 |204     | A workspace foi deletada com sucesso.    |
 |400     | Não existe uma workspace com esse ID.    |
+
+
+</br>
+</br>
+</br>
+
+---
+
+</br>
+</br>
+</br> 
 
 <!-- Listagem dos endpoints -->
 # Endpoints - WorkSpace 💻
@@ -377,6 +384,67 @@ createdAt | Não | Esse campo é gerado automaticamente pelo sistema, uma vez ge
 |204     | A workspace foi deletada com sucesso.    |
 |400     | Não existe uma workspace com esse ID.    |
 
-<br/>
+</br>
+</br>
+</br>
+
+---
+
+</br>
+</br>
+</br> 
+
+
+<!-- Listagem dos endpoints -->
+# Endpoints - Project 📅
+- Criar project
+- Detalhar project
+- Listar projects
+- Editar project  
+- Apagar project
+</br>
+</br>
+
+## Cadastro de Project 🔨
+
+<!-- Endereço do recurso -->
+`POST` - **flowes/api/v1/project**
+
+**Exemplo de Entrada** 
+
+```js
+{
+    workspace_id: 1,
+    name: "Nubeck Project",
+    deadline: {
+        start: {
+            start_date: "22/05/2022",
+            start_hours: "09:00",
+        },
+        end: {
+            end_date: "25/05/2022",
+            end_hours: "09:00"
+        }
+    },
+    label: "#AEEBB4",
+    description: "Tarefas do projeto nubeck."
+}
+```
+
+### **Campos da Requisição**
+
+| Campo | Obrigatório | Tipo  | Descrição |
+|-------|-------------|-------|-----------|
+|workspace_id|Sim|Numero|Para um projeto pertencer a uma workspace é preciso informar uma referência dela, o id é a referência da workspace que o projeto pertence.
+|name| Sim | Texto | Nome do projeto, será exibido na tela.
+|deadline|Sim|Objeto|Objeto que conterá as informações da deadline do projeto
+|start|Sim|Objeto|Objeto que conterá as informações da data de inicio da deadline.
+|end|Sim|Objeto|Objeto que conterá as informações da data de término da deadline.
+|start_date|Sim|Texto|Data de inicio do projeto.
+|start_hour|Sim|Texto|Horário de inicio do projeto.
+|end_date|Sim|Texto|Data de término do projeto.
+|end_hour|Sim|Texto|Horário de término do projeto.
+|label|Sim|Texto|Cor em hexadecimal da label do projeto
+|description|Não|Texto|Uma breve descrição do projeto.
 
 > A Documentação ainda está sendo feita 📝 <br/>  Projeto em Desenvolvimento... 🏗

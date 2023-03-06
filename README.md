@@ -254,10 +254,10 @@ data_nascimento|sim|data|A data de nascimento do cliente.
 
 | Campo | Obrigatório | Tipo  | Descrição |
 |-------|-------------|-------|-----------|
-|name   |sim          |texto |O nome da sua workspace
-|deadline|sim|data| O data de prazo para você completar todos os projetos da sua workspace
-|description| não| texto| Uma breve descrição sobre sua workspace
-workspace_photo|não|imagem|Uma foto da sua workspace
+|name   |sim          |texto |O nome workspace do cliente.
+|deadline|sim|data| O data de prazo para o cliente completar todos os seus projetos da workspace.
+|description| não| texto| Uma breve descrição sobre a workspace.
+workspace_photo|não|imagem|Uma foto da workspace.
 
 **Exemplo de Resposta** 
 ```js

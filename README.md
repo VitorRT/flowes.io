@@ -272,7 +272,8 @@ workspace_photo|não|imagem|Uma foto da workspace.
     description: "Espaço de trabalho para serviços da FIAP",
     workspace_photo: "fiap_img.png",
     createdAt: "2022-12-10",
-    updatedAt: "2022-12-10"
+    updatedAt: "2022-12-10",
+    itsComplete: false
 }
 ```
 
@@ -305,7 +306,8 @@ workspace_photo|não|imagem|Uma foto da workspace.
     description: "Espaço de trabalho para serviços da FIAP",
     workspace_photo: "fiap_img.png",
     createdAt: "2022-12-10",
-    updatedAt: "2022-12-10"
+    updatedAt: "2022-12-10",
+    itsComplete: false
 }
 ```
 ### **Códigos da Resposta**
@@ -339,6 +341,7 @@ workspace_photo|não|imagem|Uma foto da workspace.
         workspace_photo: "fiap_img.png",
         createdAt: "2022-12-10",
         updatedAt: "2022-12-10",
+        itsComplete: false
     },
 ]
 ```
@@ -389,7 +392,8 @@ workspace_photo | Sim  | Para caso você queira alterar a foto atual da sua work
     description: "Espaço de trabalho para serviços da FIAP",
     workspace_photo: "fiap_img2.png",
     createdAt: "2022-12-10",
-    updatedAt: "2023-01-02"
+    updatedAt: "2023-01-02",
+    itsComplete: false
 }
 ```
 
@@ -466,7 +470,8 @@ workspace_photo | Sim  | Para caso você queira alterar a foto atual da sua work
         }
     },
     label: "#AEEBB4",
-    description: "Tarefas do projeto nubeck."
+    description: "Tarefas do projeto nubeck.",
+    itsComplete: false
 }
 ```
 
@@ -511,7 +516,8 @@ workspace_photo | Sim  | Para caso você queira alterar a foto atual da sua work
     label: "#AEEBB4",
     description: "Tarefas do projeto nubeck.",
     createdAt: "10/04/2022",
-    updatedAt: "10/04/2022"
+    updatedAt: "10/04/2022",
+    itsComplete: false
 }
 ```
 
@@ -554,7 +560,8 @@ workspace_photo | Sim  | Para caso você queira alterar a foto atual da sua work
     label: "#AEEBB4",
     description: "Tarefas do projeto nubeck.",
     createdAt: "10/04/2022",
-    updatedAt: "10/04/2022"
+    updatedAt: "10/04/2022",
+    itsComplete: false
 }
 ```
 ### **Códigos da Resposta**
@@ -597,7 +604,8 @@ workspace_photo | Sim  | Para caso você queira alterar a foto atual da sua work
         label: "#AEEBB4",
         description: "Tarefas do projeto nubeck.",
         createdAt: "10/04/2022",
-        updatedAt: "10/04/2022"
+        updatedAt: "10/04/2022",
+        itsComplete: false
     },
     {
         id: 2,
@@ -619,7 +627,8 @@ workspace_photo | Sim  | Para caso você queira alterar a foto atual da sua work
         label: "#F4D1A8",
         description: "Tarefas do projeto nubeck.",
         createdAt: "10/04/2022",
-        updatedAt: "10/04/2022"
+        updatedAt: "10/04/2022",
+        itsComplete: false
     }
 ]
 ```
@@ -692,7 +701,8 @@ workspace_photo | Sim  | Para caso você queira alterar a foto atual da sua work
     label: "#F4D1A8",
     description: "Tarefas do projeto nubeck.",
     createdAt: "10/04/2022",
-    updatedAt: "10/04/2022"
+    updatedAt: "10/04/2022",
+    itsComplete: false
 }
 ```
 

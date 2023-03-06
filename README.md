@@ -747,5 +747,142 @@ workspace_photo | Sim  | Para caso você queira alterar a foto atual da sua work
 </br> 
 
 
+<!-- Listagem dos endpoints -->
+# Endpoints - Categorie 🧮
+- Criar categorie
+- Detalhar categories
+- Listar categorie
+- Editar categorie  
+- Apagar categorie
+</br>
+</br>
+
+## Cadastro de Categorie 🔨
+
+<!-- Endereço do recurso -->
+`POST` - **flowes/api/v1/categorie**
+
+ 
+**Exemplo de Entrada** 
+
+```js
+{
+    project_id: 1,
+    name: "Do Today 👇",
+    tasks_day: "02/11/2022"
+}
+```
+### **Campos da Requisição**
+
+| Campo | Obrigatório | Tipo  | Descrição |
+|-------|-------------|-------|-----------|
+|project_id|sim|numero|O id do projeto que essa categoria pertence.|
+|name|sim|texto|O nome da categoria.|
+|tasks_day|sim|data|A data do dia que as terefas serão realizadas.|
+
+**Exemplo de Resposta** 
+```js
+{
+   id: 1, 
+   project: {
+        id: 1,
+        name: "Nubeck Project"
+   },
+   name: "Do Today 👇",
+   tasks_day: "02/11/2022",
+   createdAt: "02/11/2022",
+   updatedAt: "02/11/2022",
+   itsComplete: false
+}
+```
+
+### **Códigos da Resposta**
+
+| Código | Descrição                            |
+|--------|--------------------------------------|
+|201     | A categoria foi criada com sucesso.  |
+|400     | Os dados enviados são inválidos.     |
+
+
+---
+
+
+## Detalhar Categorie 📋
+
+<!-- Endereço do recurso -->
+`GET` - **flowes/api/v1/categorie/{id}**
+
+**Exemplo de Resposta** 
+
+```js
+{
+   id: 1, 
+   project: {
+        id: 1,
+        name: "Nubeck Project"
+   },
+   name: "Do Today 👇",
+   tasks_day: "02/11/2022",
+   createdAt: "02/11/2022",
+   updatedAt: "02/11/2022",
+   itsComplete: false
+}
+```
+### **Códigos da Resposta**
+
+| Código | Descrição                            |
+|--------|--------------------------------------|
+|200     | Os dados da categoria foram retornados.|
+|400     | Não existe uma categoria com esse ID.   | 
+
+
+
+---
+
+
+## Listar Categories 📋
+
+<!-- Endereço do recurso -->
+`GET` - **flowes/api/v1/categorie**
+
+**Exemplo de Resposta** 
+
+```js
+[
+    {
+        id: 1, 
+       project: {
+            id: 1,
+            name: "Nubeck Project"
+       },
+       name: "Do Today 👇",
+       tasks_day: "02/11/2022",
+       createdAt: "02/11/2022",
+       updatedAt: "02/11/2022",
+       itsComplete: false
+    },
+    {
+        id: 2, 
+       project: {
+            id: 1,
+            name: "Nubeck Project"
+       },
+       name: "Do Tomorrow 👇",
+       tasks_day: "03/11/2022",
+       createdAt: "02/11/2022",
+       updatedAt: "02/11/2022",
+       itsComplete: false    
+    }
+]
+```
+
+### **Códigos da Resposta**
+
+| Código | Descrição                                |
+|--------|------------------------------------------|
+|200     | Os dados da categoria foram retornados.  |
+
+
+---
 
 > A Documentação ainda está sendo feita 📝 <br/>  Projeto em Desenvolvimento... 🏗

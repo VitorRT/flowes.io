@@ -161,7 +161,7 @@ data_nascimento|sim|data|A data de nascimento do cliente.
 | Campos    | Editável | Considerações |
 |-----------|----------|---------------|
 |client_name|Sim       |O cliente poderá alterar seu nome caso não tenha gostado.
-|email      |Não       |O email não poderá ser alterado, é algo unico que o identifica no sistema. 
+|email      |Não       |O email não poderá ser alterado, é algo unico do cliente que o sistema identifica. 
 |senha      |Sim       |A senha é editável e o cliente poderá editar caso tenha esquecido sua antiga senha.
 |data_nascimento|Sim    |A data de nascimento também é editável, caso o cliente tenha colocado uma data errada o mesmo poderá altera-la.
 |createdAt  |Não        |O Cliente não poderá editar este campo, ele é gerado automaticamente pelo sistema e permanecerá assim para sempre.

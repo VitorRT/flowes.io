@@ -187,9 +187,6 @@ data_nascimento|sim|data|A data de nascimento do cliente.
 |200     | Os dados do cliente foram retornados.  |
 |400     | Não existe um cliente com esse ID.    |
 
-<br/>
-<br/>
-
 ---
 
 ## Deletar Client 🗑
@@ -882,6 +879,53 @@ workspace_photo | Sim  | Para caso você queira alterar a foto atual da sua work
 |--------|------------------------------------------|
 |200     | Os dados da categoria foram retornados.  |
 
+
+---
+
+
+## Editar Categorie ⚙
+
+<!-- Endereço do recurso -->
+`PUT` - **flowes/api/v1/categorie/{id}**
+
+**Campos da Requisição** 
+```js
+{
+    name: "Daily Tasks",
+    tasks_day: "01/11/2022"
+}
+```
+
+**Regras de Negócio - Edição de Client**
+
+| Campos    | Editável | Considerações |
+|-----------|----------|---------------|
+|name       |sim       | O nome da categoria é editável caso o usuário não tenha gostado.|
+|tasks_day  |sim       | A data da categoria é editável caso o usuário queira alterar o dia das tarefas|
+
+
+**Exemplo de Resposta** 
+```js
+{
+    id: 1, 
+       project: {
+            id: 1,
+            name: "Nubeck Project"
+       },
+       name: "Daily Tasks",
+       tasks_day: "01/11/2022",
+       createdAt: "02/11/2022",
+       updatedAt: "02/11/2022",
+       itsComplete: false  
+}
+```
+
+### **Códigos da Resposta**
+
+| Código | Descrição                                |
+|--------|------------------------------------------|
+|200     | Os dados da categoria foram alterados e retornados.   |
+|400     | Não existe uma categoria com esse ID.       |
 
 ---
 

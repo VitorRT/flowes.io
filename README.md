@@ -50,6 +50,7 @@ data_nascimento|sim|data|A data de nascimento do cliente.
 
 ```js
 {
+    id: 1,
     client_name: "Yukari",
     email: "brunayuuki@gmail.com",
     senha: "exemplo123",
@@ -79,6 +80,7 @@ data_nascimento|sim|data|A data de nascimento do cliente.
 
 ```js
 {
+    id: 1,
     client_name: "Yukari",
     email: "brunayuuki@gmail.com",
     senha: "exemplo123",

@@ -929,4 +929,105 @@ workspace_photo | Sim  | Para caso você queira alterar a foto atual da sua work
 
 ---
 
+## Deletar Categorie 🗑
+
+<!-- Endereço do recurso -->
+`DELETE` - **flowes/api/v1/project/{id}**
+
+**Exemplo de Resposta** 
+```js
+{
+     status: 204,
+     message: "Categoria deletada com sucesso!"
+}
+```
+
+### **Códigos da Resposta**
+
+| Código | Descrição                                |
+|--------|------------------------------------------|
+|204     | O Projeto foi deletada com sucesso.    |
+|400     | Não existe um projeto com esse ID.    |
+
+</br>
+</br>
+</br>
+
+---
+
+</br>
+</br>
+</br> 
+
+
+
+<!-- Listagem dos endpoints -->
+# Endpoints - Task ✅
+- Criar task
+- Detalhar tasks
+- Listar task
+- Editar task  
+- Apagar task
+</br>
+</br>
+
+## Cadastro de Task 🔨
+
+<!-- Endereço do recurso -->
+`POST` - **flowes/api/v1/task**
+
+ 
+**Exemplo de Entrada** 
+
+```js
+{
+ categorie_id: 1,
+ name: "Development Route Home",
+ role: "Front-End Development",
+ task_label: "#39DBFF",
+ deadline_task: {
+    start_hour: "09:00",
+    end_hour: "11:00"
+ }
+}
+```
+### **Campos da Requisição**
+
+| Campo | Obrigatório | Tipo  | Descrição |
+|-------|-------------|-------|-----------|
+|categorie_id|sim|numero|O id da categoria que a terefa pertence.|
+|name|sim|texto|O nome da tarefa.|
+|role|sim|texto|A função/papel que a tarefa irá exercer.|
+|task_label|sim|texto|Uma cor hexadecimal que representará a tarefa.|
+|deadline_task|sim|objeto|Um objeto que conterá os dados da deadline da tarefa.|
+|start_hour|sim|texto|Hora de inicio da tarefa.|
+|end_hour|sim|texto|Hora de término da tarefa.|
+
+**Exemplo de Resposta** 
+```js
+{
+   categorie_id: 1,
+ name: "Development Route Home",
+ role: "Front-End Development",
+ task_label: "#39DBFF",
+ deadline_task: {
+    start_hour: "09:00",
+    end_hour: "11:00"
+ },
+ createdAt:"02/05/2022",
+ updatedAt: "02/05/2022",
+ check: false
+ }
+```
+
+### **Códigos da Resposta**
+
+| Código | Descrição                            |
+|--------|--------------------------------------|
+|201     | A tarefa foi criada com sucesso.  |
+|400     | Os dados enviados são inválidos.     |
+
+
+---
+
 > A Documentação ainda está sendo feita 📝 <br/>  Projeto em Desenvolvimento... 🏗

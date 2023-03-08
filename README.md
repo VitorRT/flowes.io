@@ -981,14 +981,14 @@ workspace_photo | Sim  | Para caso você queira alterar a foto atual da sua work
 
 ```js
 {
- categorie_id: 1,
- name: "Development Route Home",
- role: "Front-End Development",
- task_label: "#39DBFF",
- deadline_task: {
-    start_hour: "09:00",
-    end_hour: "11:00"
- }
+     categorie_id: 1,
+     name: "Development Route Home",
+     role: "Front-End Development",
+     task_label: "#39DBFF",
+     deadline_task: {
+        start_hour: "09:00",
+        end_hour: "11:00"
+     }
 }
 ```
 ### **Campos da Requisição**
@@ -1006,17 +1006,17 @@ workspace_photo | Sim  | Para caso você queira alterar a foto atual da sua work
 **Exemplo de Resposta** 
 ```js
 {
-   categorie_id: 1,
- name: "Development Route Home",
- role: "Front-End Development",
- task_label: "#39DBFF",
- deadline_task: {
-    start_hour: "09:00",
-    end_hour: "11:00"
- },
- createdAt:"02/05/2022",
- updatedAt: "02/05/2022",
- check: false
+       categorie_id: 1,
+     name: "Development Route Home",
+     role: "Front-End Development",
+     task_label: "#39DBFF",
+     deadline_task: {
+        start_hour: "09:00",
+        end_hour: "11:00"
+     },
+     createdAt:"02/05/2022",
+     updatedAt: "02/05/2022",
+     check: false
  }
 ```
 
@@ -1030,4 +1030,151 @@ workspace_photo | Sim  | Para caso você queira alterar a foto atual da sua work
 
 ---
 
-> A Documentação ainda está sendo feita 📝 <br/>  Projeto em Desenvolvimento... 🏗
+## Detalhar Task 📋
+
+<!-- Endereço do recurso -->
+`GET` - **flowes/api/v1/task/{id}**
+
+**Exemplo de Resposta** 
+
+```js
+{
+      categorie_id: 1,
+     name: "Development Route Home",
+     role: "Front-End Development",
+     task_label: "#39DBFF",
+     deadline_task: {
+        start_hour: "09:00",
+        end_hour: "11:00"
+     },
+     createdAt:"02/05/2022",
+     updatedAt: "02/05/2022",
+     check: false
+}
+```
+### **Códigos da Resposta**
+
+| Código | Descrição                            |
+|--------|--------------------------------------|
+|200     | Os dados da tarefa foram retornados. |
+|400     | Não existe uma tarefa com esse ID.   | 
+
+
+
+---
+
+
+
+## Listar Tasks 📋
+
+<!-- Endereço do recurso -->
+`GET` - **flowes/api/v1/task**
+
+**Exemplo de Resposta** 
+
+```js
+[
+    {
+         categorie_id: 1,
+         name: "Development Route Home",
+         role: "Front-End Development",
+         task_label: "#39DBFF",
+         deadline_task: {
+            start_hour: "09:00",
+            end_hour: "11:00"
+         },
+         createdAt:"02/05/2022",
+         updatedAt: "02/05/2022",
+         check: false
+    }
+]
+```
+
+### **Códigos da Resposta**
+
+| Código | Descrição                                |
+|--------|------------------------------------------|
+|200     | Os dados das tarefas foram retornados.   |
+
+
+---
+
+
+
+## Editar Task ⚙
+
+<!-- Endereço do recurso -->
+`PUT` - **flowes/api/v1/categorie/{id}**
+
+**Campos da Requisição** 
+```js
+{
+    name: "Development Route Perfil",
+    role: "Front-End Development",
+    deadline_task: {
+        start_hour: "09:00",
+        end_hour: "11:00"
+     },
+}
+```
+
+**Regras de Negócio - Edição de Client**
+
+| Campos    | Editável | Considerações |
+|-----------|----------|---------------|
+|name       |sim       | O nome da tarefa é editável caso o usuário não tenha gostado.|
+|role       |sim       | O nome da role é editável caso o usuário não tenha gostado.
+|deadline_task  |sim       | O objeto que contem as informações da dealine da tarefa é editável caso o usuário não tenha gostado|
+
+
+**Exemplo de Resposta** 
+```js
+{
+     categorie_id: 1,
+     name: "Development Route Perfil",
+     role: "Front-End Development",
+     task_label: "#39DBFF",
+     deadline_task: {
+        start_hour: "09:00",
+        end_hour: "11:00"
+     },
+     createdAt:"02/05/2022",
+     updatedAt: "02/05/2022",
+     check: false
+}
+```
+
+### **Códigos da Resposta**
+
+| Código | Descrição                                |
+|--------|------------------------------------------|
+|200     | Os dados da tarefa foram alterados e retornados.   |
+|400     | Não existe uma tarefa com esse ID.        |
+
+---
+
+
+## Deletar Task 🗑
+
+<!-- Endereço do recurso -->
+`DELETE` - **flowes/api/v1/task/{id}**
+
+**Exemplo de Resposta** 
+```js
+{
+     status: 204,
+     message: "Categoria deletada com sucesso!"
+}
+```
+
+### **Códigos da Resposta**
+
+| Código | Descrição                                |
+|--------|------------------------------------------|
+|204     | O Projeto foi deletada com sucesso.      |
+|400     | Não existe um projeto com esse ID.       |
+
+</br>
+</br>
+
+> Versão Alpha da Flowes Api 💻

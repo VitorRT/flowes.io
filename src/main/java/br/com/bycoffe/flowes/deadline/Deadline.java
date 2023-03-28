@@ -1,8 +1,16 @@
 package br.com.bycoffe.flowes.deadline;
 
+import jakarta.persistence.Embeddable;
+import jakarta.persistence.Embedded;
+
+@Embeddable
 public class Deadline {
+    @Embedded
     private DeadlineStart start;
+    @Embedded
     private DeadlineEnd end;
+
+    protected Deadline() { }
 
 
     public Deadline(DeadlineStart start, DeadlineEnd end) {

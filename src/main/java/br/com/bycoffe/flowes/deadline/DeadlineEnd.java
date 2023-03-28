@@ -2,9 +2,17 @@ package br.com.bycoffe.flowes.deadline;
 
 import java.time.LocalDate;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
+
+@Embeddable
 public class DeadlineEnd {
+    @Column(nullable = false)
     private LocalDate end_date;
+    @Column(nullable = false)
     private int end_hours;
+
+    protected DeadlineEnd() { }
 
 
     public DeadlineEnd(LocalDate end_date, int end_hours) {

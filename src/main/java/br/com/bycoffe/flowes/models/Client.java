@@ -1,7 +1,9 @@
 package br.com.bycoffe.flowes.models;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -11,14 +13,23 @@ import jakarta.persistence.Id;
 public class Client {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(nullable = false)
     private String client_name;
+    @Column(nullable = false, unique = true)
     private String email;
+    @Column(nullable = false)
     private String senha;
+    @Column(nullable = false)
     private LocalDate data_nascimento;
-    private LocalDate createdAt;
-    private LocalDate updatedAt;
+    @Column(nullable = false)
+    private LocalDateTime createdAt;
+    @Column(nullable = false)
+    private LocalDateTime updatedAt;
     
-    
+    protected Client() {
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
+    }
 
     public Client(Long id, String client_name, String email, String senha, LocalDate data_nascimento) {
         this.id = id;
@@ -26,8 +37,8 @@ public class Client {
         this.email = email;
         this.senha = senha;
         this.data_nascimento = data_nascimento;
-        this.createdAt = LocalDate.now();
-        this.updatedAt = LocalDate.now();
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
     }
 
 
@@ -61,16 +72,16 @@ public class Client {
     public void setData_nascimento(LocalDate data_nascimento) {
         this.data_nascimento = data_nascimento;
     }
-    public LocalDate getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
-    public void setCreatedAt(LocalDate createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
-    public LocalDate getUpdatedAt() {
+    public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
-    public void setUpdatedAt(LocalDate updatedAt) {
+    public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
 

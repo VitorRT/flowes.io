@@ -1,17 +1,37 @@
 package br.com.bycoffe.flowes.models;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
 public class Workspace {
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(nullable = false)
     private String name;
+    @Column(nullable = false)
     private LocalDate deadline;
+    @Column(nullable = true)
     private String description;
+    @Column(nullable = false)
     private String workspace_photo;
-    private LocalDate createdAt;
-    private LocalDate updatedAt;
+    @Column(nullable = false)
+    private LocalDateTime createdAt;
+    @Column(nullable = false)
+    private LocalDateTime updatedAt;
+    @Column(nullable = false, name = "its_complete")
     private Boolean itsComplete;
 
+    protected Workspace() { 
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
+    }
 
     public Workspace(Long id, String name, LocalDate deadline, String description, String workspace_photo) {
         this.id = id;
@@ -19,8 +39,8 @@ public class Workspace {
         this.deadline = deadline;
         this.description = description;
         this.workspace_photo = workspace_photo;
-        this.createdAt = LocalDate.now();
-        this.updatedAt = LocalDate.now();
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
         this.itsComplete = false;
     }
 
@@ -56,16 +76,16 @@ public class Workspace {
     public void setWorkspace_photo(String workspace_photo) {
         this.workspace_photo = workspace_photo;
     }
-    public LocalDate getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
-    public void setCreatedAt(LocalDate createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
-    public LocalDate getUpdatedAt() {
+    public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
-    public void setUpdatedAt(LocalDate updatedAt) {
+    public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
     public Boolean getItsComplete() {

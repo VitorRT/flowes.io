@@ -2,6 +2,7 @@ package br.com.bycoffe.flowes.controller;
 
 
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -95,6 +96,7 @@ public class ClientController {
        // BeanUtils.copyProperties(clientEncontrado, clienteAtualizado, "id");
 
         cliente.setId(id);
+        cliente.setUpdatedAt(LocalDateTime.now());
         repository.save(cliente);
         
         return ResponseEntity.ok(cliente);

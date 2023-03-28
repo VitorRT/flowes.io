@@ -458,12 +458,12 @@ workspace_photo | Sim  | Para caso você queira alterar a foto atual da sua work
     name: "Nubeck Project",
     deadline: {
         start: {
-            start_date: "22/05/2022",
-            start_hours: "09:00",
+            start_date: "2022-05-22",
+            start_hours: 9,
         },
         end: {
-            end_date: "25/05/2022",
-            end_hours: "09:00"
+            end_date: "2022-05-22",
+            end_hours: 9
         }
     },
     label: "#AEEBB4",

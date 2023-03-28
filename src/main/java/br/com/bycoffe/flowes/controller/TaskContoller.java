@@ -16,6 +16,6 @@ public class TaskContoller {
 
         DeadlineTask deadlineTask = new DeadlineTask(Calendar.HOUR, Calendar.HOUR_OF_DAY);
 
-        return new Task(1l,"Create Spring 3.0.x Project", "Back-End 💻", "", deadlineTask);
+        return new Task(1l,"Create Spring 3.0.x Project", "Back-End 💻", "#F4D1A8", deadlineTask);
     }
 }

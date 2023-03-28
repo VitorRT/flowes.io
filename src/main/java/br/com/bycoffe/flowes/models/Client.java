@@ -66,4 +66,14 @@ public class Client {
     public void setUpdatedAt(LocalDate updatedAt) {
         this.updatedAt = updatedAt;
     }
+
+
+    @Override
+    public String toString() {
+        return "Client [id=" + id + ", client_name=" + client_name + ", email=" + email + ", senha=" + senha
+                + ", data_nascimento=" + data_nascimento + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt
+                + "]";
+    }
+
+    
 }

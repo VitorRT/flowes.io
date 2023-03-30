@@ -1,30 +1,63 @@
 package br.com.bycoffe.flowes.models;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
-import br.com.bycoffe.flowes.deadline.DeadlineTask;
+import br.com.bycoffe.flowes.utils.TaskCategory.Category;
+import br.com.bycoffe.flowes.utils.deadline.DeadlineTask;
+import jakarta.persistence.Column;
+import jakarta.persistence.Embedded;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
+
+@Entity
 public class Task {
 
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable = false)
     private String name;
+
+    @Column(nullable = false)
     private String role;
+
+    @Column(nullable = false)
     private String task_label;
+
+    @Embedded
     private DeadlineTask deadline_task;
-    
-    private LocalDate createdAt;
-    private LocalDate updatedAt;
+
+    @Column(nullable = false)
+    private Category category;
+
+    @Column(nullable = false)
+    private LocalDateTime createdAt;
+
+    @Column(nullable = false)
+    private LocalDateTime updatedAt;
+
+    @Column(nullable = false)
     private Boolean check;
     
+
+    public Task() {
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
+        this.check = false;
+    }
     
-    public Task(Long id, String name, String role, String task_label, DeadlineTask deadline_task) {
+    public Task(Long id, String name, String role, String task_label, DeadlineTask deadline_task, Category category) {
         this.id = id;
         this.name = name;
         this.role = role;
         this.task_label = task_label;
         this.deadline_task = deadline_task;
-        this.createdAt = LocalDate.now();
-        this.updatedAt = LocalDate.now();
+        this.category = category;
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
         this.check = false;
     }
 
@@ -69,19 +102,19 @@ public class Task {
         this.deadline_task = deadline_task;
     }
 
-    public LocalDate getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(LocalDate createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 
-    public LocalDate getUpdatedAt() {
+    public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(LocalDate updatedAt) {
+    public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
 
@@ -92,5 +125,13 @@ public class Task {
     public void setCheck(Boolean check) {
         this.check = check;
     }
-    
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
 }

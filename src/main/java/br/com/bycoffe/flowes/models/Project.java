@@ -2,7 +2,7 @@ package br.com.bycoffe.flowes.models;
 
 import java.time.LocalDateTime;
 
-import br.com.bycoffe.flowes.deadline.Deadline;
+import br.com.bycoffe.flowes.utils.deadline.Deadline;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;

@@ -1,4 +1,4 @@
-package br.com.bycoffe.flowes.deadline;
+package br.com.bycoffe.flowes.utils.deadline;
 
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.Embedded;

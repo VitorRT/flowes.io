@@ -30,7 +30,7 @@ public class Task {
     @Embedded
     private DeadlineTask deadline_task;
 
-    @Column(nullable = false)
+    @Embedded
     private Category category;
 
     @Column(nullable = false)
@@ -39,14 +39,14 @@ public class Task {
     @Column(nullable = false)
     private LocalDateTime updatedAt;
 
-    @Column(nullable = false)
-    private Boolean check;
+    @Column(nullable = false, name = "is_complete")
+    private Boolean isComplete;
     
 
     public Task() {
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
-        this.check = false;
+        this.isComplete = false;
     }
     
     public Task(Long id, String name, String role, String task_label, DeadlineTask deadline_task, Category category) {
@@ -58,7 +58,7 @@ public class Task {
         this.category = category;
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
-        this.check = false;
+        this.isComplete = false;
     }
 
 
@@ -118,12 +118,12 @@ public class Task {
         this.updatedAt = updatedAt;
     }
 
-    public Boolean getCheck() {
-        return check;
+    public Boolean getIsComplete() {
+        return isComplete;
     }
 
-    public void setCheck(Boolean check) {
-        this.check = check;
+    public void setIsComplet(Boolean isComplete) {
+        this.isComplete = isComplete;
     }
 
     public Category getCategory() {

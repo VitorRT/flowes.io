@@ -1,17 +1,18 @@
 package br.com.bycoffe.flowes.controller;
 
 
-
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,8 +22,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.bycoffe.flowes.models.Client;
+import br.com.bycoffe.flowes.exceptions.RestNotFoundException;
+import br.com.bycoffe.flowes.models.client.Client;
+import br.com.bycoffe.flowes.models.client.dto.ListingDataClient;
 import br.com.bycoffe.flowes.repository.ClientRepository;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/v1/client")
@@ -34,17 +38,29 @@ public class ClientController {
     ClientRepository repository;
 
 
+    /* Método privado para buscar o modelo Client no banco de dados. */
+    private Client getClient(Long id) {
+        return repository.findById(id).orElseThrow(() -> { 
+            return new RestNotFoundException("Nenhum cliente com o [ " +
+            id +
+            " ] foi encontrado!"
+            ); 
+        });
+    }
+
+
 
     @GetMapping
-    public List<Client> returnClient() {
-
+    public ResponseEntity<Page<ListingDataClient>> returnClient(@PageableDefault(size = 10) Pageable pagination) {
         log.info("[ Search ] Buscando Clientes"); 
-
-        return repository.findAll();
+        Page<ListingDataClient> pages = repository.findAllByActiveTrue(pagination).map(ListingDataClient::new);
+        return ResponseEntity.ok(pages);
     }
 
     @PostMapping
-    public ResponseEntity<Client> create(@RequestBody Client client) {
+    public ResponseEntity<Client> create(
+        @RequestBody @Valid Client client, 
+        BindingResult result) {
 
         log.info("[ Create ] Cadastrando Cliente: " + client); 
 
@@ -58,13 +74,9 @@ public class ClientController {
 
         log.info("[ Show ] Buscando Cliente: " + id);
 
-        Optional<Client> clientEncontrado = repository.findById(id);
+        Client clientEncontrado = getClient(id);
 
-        if(clientEncontrado.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
-
-        return ResponseEntity.ok(clientEncontrado.get());
+        return ResponseEntity.ok(clientEncontrado);
     }
 
     @DeleteMapping("{id}")
@@ -72,28 +84,22 @@ public class ClientController {
 
         log.info("[ Destroy ] Apagando Cliente: " + id);
 
-        Optional<Client> clientEncontrado = repository.findById(id);
+        Client clientEncontrado = getClient(id);
 
-        if(clientEncontrado.isEmpty()) { 
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
-
-        repository.delete(clientEncontrado.get());
+        repository.delete(clientEncontrado);
 
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<Client> update(@PathVariable Long id, @RequestBody Client cliente) {
+    public ResponseEntity<Client> update(
+        @PathVariable Long id, 
+        @RequestBody Client cliente
+        ) {
+            
         log.info("[ Update ] Atualizando Cliente: " + id);
 
-        Optional<Client> clientEncontrado = repository.findById(id);
-
-        if(clientEncontrado.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
-        
-       // BeanUtils.copyProperties(clientEncontrado, clienteAtualizado, "id");
+        getClient(id);
 
         cliente.setId(id);
         cliente.setUpdatedAt(LocalDateTime.now());

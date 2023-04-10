@@ -31,7 +31,6 @@ public class TaskContoller {
     TaskRepository repository;
 
 
-
     @GetMapping
     public List<Task> returnClient() {
 
@@ -82,7 +81,7 @@ public class TaskContoller {
 
     @PutMapping("{id}")
     public ResponseEntity<Task> update(@PathVariable Long id, @RequestBody Task task) {
-        log.info("[ Update ] Atualizando Cliente: " + id);
+        log.info("[ Update ] Atualizando Task: " + id);
 
         Optional<Task> taskEncontrado = repository.findById(id);
 

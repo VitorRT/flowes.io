@@ -1,6 +1,5 @@
-package br.com.bycoffe.flowes.models;
+package br.com.bycoffe.flowes.models.workspace;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
@@ -8,32 +7,48 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.FutureOrPresent;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class Workspace {
+
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(nullable = false)
+
+    @NotBlank
     private String name;
-    @Column(nullable = false)
-    private LocalDate deadline;
-    @Column(nullable = true)
+
+    @NotNull
+    @FutureOrPresent
+    private LocalDateTime deadline;
+
+    @NotBlank
     private String description;
-    @Column(nullable = false)
+
+    @NotBlank
     private String workspace_photo;
-    @Column(nullable = false)
+
+    @NotNull
     private LocalDateTime createdAt;
-    @Column(nullable = false)
+
+    @NotNull
     private LocalDateTime updatedAt;
-    @Column(nullable = false, name = "its_complete")
-    private Boolean itsComplete;
+
+    @Column(name = "complete")
+    @NotNull
+    private Boolean complete;
+
+
 
     protected Workspace() { 
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
+        this.complete = false;
     }
 
-    public Workspace(Long id, String name, LocalDate deadline, String description, String workspace_photo) {
+    public Workspace(Long id, String name, LocalDateTime deadline, String description, String workspace_photo) {
         this.id = id;
         this.name = name;
         this.deadline = deadline;
@@ -41,7 +56,7 @@ public class Workspace {
         this.workspace_photo = workspace_photo;
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
-        this.itsComplete = false;
+        this.complete = false;
     }
 
 
@@ -58,10 +73,10 @@ public class Workspace {
     public void setName(String name) {
         this.name = name;
     }
-    public LocalDate getDeadline() {
+    public LocalDateTime getDeadline() {
         return deadline;
     }
-    public void setDeadline(LocalDate deadline) {
+    public void setDeadline(LocalDateTime deadline) {
         this.deadline = deadline;
     }
     public String getDescription() {
@@ -88,10 +103,16 @@ public class Workspace {
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
-    public Boolean getItsComplete() {
-        return itsComplete;
+    public Boolean getComplete() {
+        return complete;
     }
-    public void setItsComplete(Boolean itsComplete) {
-        this.itsComplete = itsComplete;
+    public void seComplete(Boolean complete) {
+        this.complete = complete;
     }
+
+
+    public void completeThis() {
+        this.complete = true;
+    }
+    
 }

@@ -1,38 +1,30 @@
 package br.com.bycoffe.flowes.utils.deadline;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
+import jakarta.validation.constraints.FutureOrPresent;
+import jakarta.validation.constraints.NotNull;
 
 @Embeddable
 public class DeadlineStart {
-    @Column(nullable = false)
-    private LocalDate start_date;
-    @Column(nullable = false)
-    private int start_hours;
+
+    @NotNull
+    @FutureOrPresent
+    private LocalDateTime start_date;
 
 
     protected DeadlineStart() { }
 
-    public DeadlineStart(LocalDate start_date, int start_hours) {
+    public DeadlineStart(LocalDateTime start_date) {
         this.start_date = start_date;
-        this.start_hours = start_hours;
     }
 
-    public LocalDate getStart_date() {
+    public LocalDateTime getStart_date() {
         return start_date;
     }
 
-    public void setStart_date(LocalDate start_date) {
+    public void setStart_date(LocalDateTime start_date) {
         this.start_date = start_date;
-    }
-
-    public int getStart_hours() {
-        return start_hours;
-    }
-
-    public void setStart_hours(int start_hours) {
-        this.start_hours = start_hours;
     }
 }

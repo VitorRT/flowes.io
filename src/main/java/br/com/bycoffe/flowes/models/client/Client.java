@@ -1,34 +1,53 @@
-package br.com.bycoffe.flowes.models;
+package br.com.bycoffe.flowes.models.client;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-import jakarta.persistence.Column;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PastOrPresent;
 
 @Entity
+@Table(uniqueConstraints = @UniqueConstraint( columnNames={ "email" } ) )
 public class Client {
+    
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(nullable = false)
+
+    @NotBlank
     private String client_name;
-    @Column(nullable = false, unique = true)
+
+    @NotBlank
     private String email;
-    @Column(nullable = false)
+
+    @NotBlank
     private String senha;
-    @Column(nullable = false)
+
+    @NotNull
+    @PastOrPresent
     private LocalDate data_nascimento;
-    @Column(nullable = false)
+
+    @NotNull
     private LocalDateTime createdAt;
-    @Column(nullable = false)
+
+    @NotNull
     private LocalDateTime updatedAt;
+
+    @NotNull
+    private Boolean active;
+
     
     protected Client() {
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
+        this.active = true;
     }
 
     public Client(Long id, String client_name, String email, String senha, LocalDate data_nascimento) {
@@ -39,6 +58,7 @@ public class Client {
         this.data_nascimento = data_nascimento;
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
+        this.active = true;
     }
 
 
@@ -84,6 +104,21 @@ public class Client {
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
+
+
+    /* Usar este método futuramente quando formos trabalhar com soft delete. */
+    public void turnOffAccount() {
+        this.active = false;
+    }
+    
 
 
     @Override

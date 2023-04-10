@@ -1,4 +1,4 @@
-package br.com.bycoffe.flowes.models;
+package br.com.bycoffe.flowes.models.project;
 
 import java.time.LocalDateTime;
 
@@ -9,6 +9,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 
 @Entity
 public class Project {
@@ -16,26 +19,31 @@ public class Project {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @NotBlank
     private String name;
 
     @Embedded
     private Deadline deadline;
 
-    @Column(nullable = false)
+    @NotBlank
     private String label;
 
-    @Column(nullable = true)
+    @NotBlank
     private String description;
 
-    @Column(nullable = false)
+  
+    @NotNull
     private LocalDateTime createdAt;
 
-    @Column(nullable = false)
+
+    @NotNull
     private LocalDateTime updatedAt;
 
-    @Column(nullable = false, name="its_complete")
+    @Column(name="its_complete")
+    @NotNull
     private Boolean itsComplete;
+
+
 
     protected Project() {
         this.createdAt = LocalDateTime.now();
@@ -54,50 +62,43 @@ public class Project {
         this.itsComplete = false;
     }
 
+    
+
     public Long getId() {
         return id;
     }
-
 
     public void setId(Long id) {
         this.id = id;
     }
 
-
     public String getName() {
         return name;
     }
-
 
     public void setName(String name) {
         this.name = name;
     }
 
-
     public Deadline getDeadline() {
         return deadline;
     }
-
 
     public void setDeadline(Deadline deadline) {
         this.deadline = deadline;
     }
 
-
     public String getLabel() {
         return label;
     }
-
 
     public void setLabel(String label) {
         this.label = label;
     }
 
-
     public String getDescription() {
         return description;
     }
-
 
     public void setDescription(String description) {
         this.description = description;
@@ -125,6 +126,11 @@ public class Project {
 
     public void setItsComplete(Boolean itsComplete) {
         this.itsComplete = itsComplete;
+    }
+
+    
+    public void completeThis() {
+        this.itsComplete = true;
     }
 
 }

@@ -8,6 +8,6 @@ import br.com.bycoffe.flowes.models.project.Project;
 
 public interface ProjectRepository extends JpaRepository<Project, Long>{
 
-    public Page<Project> findAllByActiveTrue(Pageable pagination);
+    public Page<Project> findAllByCompleteFalse(Pageable pagination);
     
 }

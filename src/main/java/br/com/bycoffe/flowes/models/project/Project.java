@@ -2,135 +2,79 @@ package br.com.bycoffe.flowes.models.project;
 
 import java.time.LocalDateTime;
 
+import br.com.bycoffe.flowes.models.project.dto.RegisterDataProject;
+import br.com.bycoffe.flowes.models.project.dto.UpdateDataProject;
+import br.com.bycoffe.flowes.models.workspace.Workspace;
 import br.com.bycoffe.flowes.utils.deadline.Deadline;
-import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+import jakarta.persistence.ManyToOne;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 
 @Entity
+@Data @EqualsAndHashCode
 public class Project {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
+    @ManyToOne
+    private Workspace workspace;
+
     private String name;
 
     @Embedded
     private Deadline deadline;
 
-    @NotBlank
     private String label;
 
-    @NotBlank
     private String description;
 
-  
-    @NotNull
     private LocalDateTime createdAt;
 
-
-    @NotNull
     private LocalDateTime updatedAt;
 
-    @Column(name="its_complete")
-    @NotNull
-    private Boolean itsComplete;
-
+    private Boolean complete;
 
 
     protected Project() {
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
-        this.itsComplete = false;
+        this.complete = false;
     }
 
-    public Project(Long id, String name, Deadline deadline, String label, String description) {
+    public Project(Long id) {
         this.id = id;
-        this.name = name;
-        this.deadline = deadline;
-        this.label = label;
-        this.description = description;
+    }
+
+    public Project(RegisterDataProject projectDTO) {
+        this.workspace = projectDTO.workspace();
+        this.name = projectDTO.name();
+        this.deadline = projectDTO.deadline();
+        this.label = projectDTO.label();
+        this.description = projectDTO.description() == null ? "Meu projeto maravilhoso 😊" : projectDTO.description();
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
-        this.itsComplete = false;
+        this.complete = false;
     }
 
-    
-
-    public Long getId() {
-        return id;
+    public Project(UpdateDataProject projectDTO) {
+        this.name = projectDTO.name();
+        this.deadline = projectDTO.deadline();
+        this.label = projectDTO.label();
+        this.description = projectDTO.description();
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
+        this.complete = false;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Deadline getDeadline() {
-        return deadline;
-    }
-
-    public void setDeadline(Deadline deadline) {
-        this.deadline = deadline;
-    }
-
-    public String getLabel() {
-        return label;
-    }
-
-    public void setLabel(String label) {
-        this.label = label;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
-    public Boolean getItsComplete() {
-        return itsComplete;
-    }
-
-    public void setItsComplete(Boolean itsComplete) {
-        this.itsComplete = itsComplete;
-    }
-
-    
     public void completeThis() {
-        this.itsComplete = true;
+        this.complete = true;
     }
 
 }

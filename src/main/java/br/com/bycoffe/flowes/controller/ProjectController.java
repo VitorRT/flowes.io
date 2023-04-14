@@ -23,8 +23,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.bycoffe.flowes.exceptions.RestNotFoundException;
 import br.com.bycoffe.flowes.models.project.Project;
+import br.com.bycoffe.flowes.models.project.dto.DetailsDataProject;
 import br.com.bycoffe.flowes.models.project.dto.ListingDataProject;
+import br.com.bycoffe.flowes.models.project.dto.RegisterDataProject;
 import br.com.bycoffe.flowes.repository.ProjectRepository;
+import br.com.bycoffe.flowes.repository.WorkspaceRepository;
 import jakarta.validation.Valid;
 
 @RestController
@@ -35,6 +38,9 @@ public class ProjectController {
     
     @Autowired
     ProjectRepository repository;
+
+    @Autowired
+    WorkspaceRepository workspaceRepository;
 
 
     private Project getProject(Long id) {
@@ -51,37 +57,41 @@ public class ProjectController {
     @GetMapping
     public ResponseEntity<Page<ListingDataProject>> returnClient(@PageableDefault(size = 10) Pageable pagination) {
         log.info("[ Search ] Buscando Projects"); 
-        Page<ListingDataProject> pages = repository.findAllByActiveTrue(pagination).map(ListingDataProject::new);
+        Page<ListingDataProject> pages = repository.findAllByCompleteFalse(pagination).map(ListingDataProject::new);
         return ResponseEntity.ok(pages);
     }
 
 
     @PostMapping
-    public ResponseEntity<Project> create(
-        @RequestBody @Valid Project project,
+    public ResponseEntity<DetailsDataProject> create(
+        @RequestBody @Valid RegisterDataProject projectDTO,
         BindingResult result
         ) {
 
-        log.info("[ Create ] Cadastrando Project: " + project); 
-
+        log.info("[ Create ] Cadastrando Project: " + projectDTO); 
+        Project project = new Project(projectDTO);
         repository.save(project);
+        project.setWorkspace(workspaceRepository.findById(projectDTO.workspace().getId()).get());
+        DetailsDataProject projectCreated = new DetailsDataProject(project);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(project);
+        return ResponseEntity.status(HttpStatus.CREATED).body(projectCreated);
     }
 
 
     @GetMapping("{id}")
-    public ResponseEntity<Project> show(@PathVariable Long id) {
+    public ResponseEntity<DetailsDataProject> show(@PathVariable Long id) {
 
         log.info("[ Show ] Buscando Project: " + id);
 
         Project projectEncontrado = getProject(id);
 
-        return ResponseEntity.ok(projectEncontrado);
+        DetailsDataProject project = new DetailsDataProject(projectEncontrado);
+
+        return ResponseEntity.ok(project);
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<Project> destroy(@PathVariable Long id) {
+    public ResponseEntity<DetailsDataProject> destroy(@PathVariable Long id) {
 
         log.info("[ Destroy ] Apagando Project: " + id);
 
@@ -93,16 +103,19 @@ public class ProjectController {
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<Project> update(@PathVariable Long id, @RequestBody Project project) {
+    public ResponseEntity<DetailsDataProject> update(@PathVariable Long id, @RequestBody Project project) {
         log.info("[ Update ] Atualizando Project: " + id);
 
-        getProject(id);
+        Project projetoEncontrado = getProject(id);
 
         project.setId(id);
         project.setUpdatedAt(LocalDateTime.now());
+        project.setWorkspace(projetoEncontrado.getWorkspace());
         repository.save(project);
-        
-        return ResponseEntity.ok(project);
+
+        DetailsDataProject projectUpdated = new DetailsDataProject(project);
+
+        return ResponseEntity.ok(projectUpdated);
     }
 
 }

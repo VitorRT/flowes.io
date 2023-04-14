@@ -24,7 +24,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.bycoffe.flowes.exceptions.RestNotFoundException;
 import br.com.bycoffe.flowes.models.client.Client;
+import br.com.bycoffe.flowes.models.client.dto.DetailsDataClient;
 import br.com.bycoffe.flowes.models.client.dto.ListingDataClient;
+import br.com.bycoffe.flowes.models.client.dto.RegisterUpdateDataClient;
 import br.com.bycoffe.flowes.repository.ClientRepository;
 import jakarta.validation.Valid;
 
@@ -58,29 +60,32 @@ public class ClientController {
     }
 
     @PostMapping
-    public ResponseEntity<Client> create(
-        @RequestBody @Valid Client client, 
+    public ResponseEntity<DetailsDataClient> create(
+        @RequestBody @Valid RegisterUpdateDataClient clientDTO, 
         BindingResult result) {
 
-        log.info("[ Create ] Cadastrando Cliente: " + client); 
+        log.info("[ Create ] Cadastrando Cliente: " + clientDTO.clientName());
 
-        repository.save(client);
+        Client clientModel = new Client(clientDTO);
+        repository.save(clientModel);
+        DetailsDataClient client = new DetailsDataClient(clientModel);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(client);
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Client> show(@PathVariable Long id) {
+    public ResponseEntity<DetailsDataClient> show(@PathVariable Long id) {
 
         log.info("[ Show ] Buscando Cliente: " + id);
 
         Client clientEncontrado = getClient(id);
+        DetailsDataClient clienteDetalhado = new DetailsDataClient(clientEncontrado);
 
-        return ResponseEntity.ok(clientEncontrado);
+        return ResponseEntity.ok(clienteDetalhado);
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<Client> destroy(@PathVariable Long id) {
+    public ResponseEntity<DetailsDataClient> destroy(@PathVariable Long id) {
 
         log.info("[ Destroy ] Apagando Cliente: " + id);
 
@@ -92,19 +97,22 @@ public class ClientController {
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<Client> update(
+    public ResponseEntity<DetailsDataClient> update(
         @PathVariable Long id, 
-        @RequestBody Client cliente
+        @RequestBody RegisterUpdateDataClient clientDTO
         ) {
             
         log.info("[ Update ] Atualizando Cliente: " + id);
 
         getClient(id);
 
-        cliente.setId(id);
-        cliente.setUpdatedAt(LocalDateTime.now());
-        repository.save(cliente);
+        Client client = new Client(clientDTO);
         
-        return ResponseEntity.ok(cliente);
+        client.setId(id);
+        client.setUpdatedAt(LocalDateTime.now());
+        repository.save(client);
+        DetailsDataClient clientDetalhado = new DetailsDataClient(client);
+        
+        return ResponseEntity.ok(clientDetalhado);
     }
 }

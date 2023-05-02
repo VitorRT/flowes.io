@@ -2,6 +2,8 @@ package br.com.bycoffe.flowes.models.project.dto;
 
 import java.time.LocalDateTime;
 
+import org.springframework.hateoas.Links;
+
 import br.com.bycoffe.flowes.models.project.Project;
 import br.com.bycoffe.flowes.models.workspace.dto.RelationDataWorkspace;
 import br.com.bycoffe.flowes.utils.deadline.Deadline;
@@ -14,7 +16,8 @@ public record DetailsDataProject(
     String label,
     String description,
     LocalDateTime createdAt,
-    LocalDateTime updatedAt
+    LocalDateTime updatedAt,
+    Links links
 ) {
     public DetailsDataProject(Project project) {
         this(
@@ -25,7 +28,8 @@ public record DetailsDataProject(
             project.getLabel(),
             project.getDescription(),
             project.getCreatedAt(),
-            project.getUpdatedAt()
+            project.getUpdatedAt(),
+            project.toEntityModel().getLinks()
         );
     }
 }

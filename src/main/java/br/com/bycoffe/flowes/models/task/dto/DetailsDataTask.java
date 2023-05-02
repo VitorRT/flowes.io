@@ -2,6 +2,8 @@ package br.com.bycoffe.flowes.models.task.dto;
 
 import java.time.LocalDateTime;
 
+import org.springframework.hateoas.Links;
+
 import br.com.bycoffe.flowes.models.project.dto.RelationDataProject;
 import br.com.bycoffe.flowes.models.task.Task;
 import br.com.bycoffe.flowes.utils.TaskCategory.Category;
@@ -16,7 +18,8 @@ public record DetailsDataTask(
     DeadlineTask deadline_task,
     Category category,
     LocalDateTime createdAt,
-    LocalDateTime updatedAt
+    LocalDateTime updatedAt,
+    Links link
 ) {
     
     public DetailsDataTask(Task task) {
@@ -29,7 +32,8 @@ public record DetailsDataTask(
             task.getDeadlineTask(),
             task.getCategory(),
             task.getCreatedAt(),
-            task.getUpdatedAt()
+            task.getUpdatedAt(),
+            task.toEntityModel().getLinks()
         );
     }
 }

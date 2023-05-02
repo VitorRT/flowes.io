@@ -2,6 +2,11 @@ package br.com.bycoffe.flowes.models.project;
 
 import java.time.LocalDateTime;
 
+import org.springframework.data.domain.Pageable;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
+
+import br.com.bycoffe.flowes.controller.ProjectController;
 import br.com.bycoffe.flowes.models.project.dto.RegisterDataProject;
 import br.com.bycoffe.flowes.models.project.dto.UpdateDataProject;
 import br.com.bycoffe.flowes.models.workspace.Workspace;
@@ -75,6 +80,14 @@ public class Project {
 
     public void completeThis() {
         this.complete = true;
+    }
+
+    public EntityModel<Project> toEntityModel() {
+        return EntityModel.of(this,
+            WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(ProjectController.class).show(id)).withSelfRel(),
+            WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(ProjectController.class).destroy(id)).withRel("delete"),
+            WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(ProjectController.class).search(Pageable.unpaged())).withRel("all")
+        );
     }
 
 }

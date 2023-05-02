@@ -2,6 +2,11 @@ package br.com.bycoffe.flowes.models.task;
 
 import java.time.LocalDateTime;
 
+import org.springframework.data.domain.Pageable;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
+
+import br.com.bycoffe.flowes.controller.TaskContoller;
 import br.com.bycoffe.flowes.models.project.Project;
 import br.com.bycoffe.flowes.models.task.dto.RegisterDataTask;
 import br.com.bycoffe.flowes.models.task.dto.UpdateDataTask;
@@ -79,6 +84,14 @@ public class Task {
 
     public void completeThis() {
         this.complete = true;
+    }
+
+    public EntityModel<Task> toEntityModel() {
+        return EntityModel.of(this,
+            WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(TaskContoller.class).show(id)).withSelfRel(),
+            WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(TaskContoller.class).destroy(id)).withRel("delete"),
+            WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(TaskContoller.class).search(Pageable.unpaged())).withRel("all")
+        );
     }
 
 }

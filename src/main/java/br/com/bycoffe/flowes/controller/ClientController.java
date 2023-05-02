@@ -1,6 +1,5 @@
 package br.com.bycoffe.flowes.controller;
 
-
 import java.time.LocalDateTime;
 
 import org.slf4j.Logger;
@@ -10,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.data.web.PagedResourcesAssembler;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.PagedModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -35,34 +37,36 @@ import jakarta.validation.Valid;
 public class ClientController {
 
     Logger log = LoggerFactory.getLogger(ClientController.class);
-    
+
     @Autowired
     ClientRepository repository;
 
+    @Autowired
+    PagedResourcesAssembler<ListingDataClient> assembler;
 
     /* Método privado para buscar o modelo Client no banco de dados. */
     private Client getClient(Long id) {
-        return repository.findById(id).orElseThrow(() -> { 
+        return repository.findById(id).orElseThrow(() -> {
             return new RestNotFoundException("Nenhum cliente com o [ " +
-            id +
-            " ] foi encontrado!"
-            ); 
+                    id +
+                    " ] foi encontrado!");
         });
     }
 
-
-
+    // ResponseEntity<PagedModel<EntityModel<ListingDataClient>>
     @GetMapping
-    public ResponseEntity<Page<ListingDataClient>> returnClient(@PageableDefault(size = 10) Pageable pagination) {
-        log.info("[ Search ] Buscando Clientes"); 
-        Page<ListingDataClient> pages = repository.findAllByActiveTrue(pagination).map(ListingDataClient::new);
-        return ResponseEntity.ok(pages);
+    public PagedModel<EntityModel<ListingDataClient>> search(@PageableDefault(size = 10) Pageable pagination) {
+        log.info("[ Search ] Buscando Clientes");
+        Page<ListingDataClient> clients = repository.findAllByActiveTrue(pagination).map(ListingDataClient::new);
+        PagedModel<EntityModel<ListingDataClient>> pagedModel = assembler.toModel(clients);
+
+        return pagedModel;
     }
 
     @PostMapping
     public ResponseEntity<DetailsDataClient> create(
-        @RequestBody @Valid RegisterUpdateDataClient clientDTO, 
-        BindingResult result) {
+            @RequestBody @Valid RegisterUpdateDataClient clientDTO,
+            BindingResult result) {
 
         log.info("[ Create ] Cadastrando Cliente: " + clientDTO.clientName());
 
@@ -78,14 +82,15 @@ public class ClientController {
 
         log.info("[ Show ] Buscando Cliente: " + id);
 
-        Client clientEncontrado = getClient(id);
-        DetailsDataClient clienteDetalhado = new DetailsDataClient(clientEncontrado);
+        Client client = getClient(id);
+        client.toEntityModel();
+        DetailsDataClient clienteDetalhado = new DetailsDataClient(client);
 
         return ResponseEntity.ok(clienteDetalhado);
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<DetailsDataClient> destroy(@PathVariable Long id) {
+    public ResponseEntity<Void> destroy(@PathVariable Long id) {
 
         log.info("[ Destroy ] Apagando Cliente: " + id);
 
@@ -98,21 +103,20 @@ public class ClientController {
 
     @PutMapping("{id}")
     public ResponseEntity<DetailsDataClient> update(
-        @PathVariable Long id, 
-        @RequestBody RegisterUpdateDataClient clientDTO
-        ) {
-            
+            @PathVariable Long id,
+            @RequestBody RegisterUpdateDataClient clientDTO) {
+
         log.info("[ Update ] Atualizando Cliente: " + id);
 
         getClient(id);
 
         Client client = new Client(clientDTO);
-        
+
         client.setId(id);
         client.setUpdatedAt(LocalDateTime.now());
         repository.save(client);
         DetailsDataClient clientDetalhado = new DetailsDataClient(client);
-        
+
         return ResponseEntity.ok(clientDetalhado);
     }
 }

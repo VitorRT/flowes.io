@@ -9,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.data.web.PagedResourcesAssembler;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.PagedModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -42,6 +45,9 @@ public class ProjectController {
     @Autowired
     WorkspaceRepository workspaceRepository;
 
+    @Autowired
+    PagedResourcesAssembler<ListingDataProject> assembler;
+
 
     private Project getProject(Long id) {
         return repository.findById(id).orElseThrow(() -> { 
@@ -55,10 +61,12 @@ public class ProjectController {
 
 
     @GetMapping
-    public ResponseEntity<Page<ListingDataProject>> returnClient(@PageableDefault(size = 10) Pageable pagination) {
-        log.info("[ Search ] Buscando Projects"); 
-        Page<ListingDataProject> pages = repository.findAllByCompleteFalse(pagination).map(ListingDataProject::new);
-        return ResponseEntity.ok(pages);
+    public PagedModel<EntityModel<ListingDataProject>> search(@PageableDefault(size = 10) Pageable pagination) {
+        log.info("[ Search ] Buscando Projects");
+        Page<ListingDataProject> projects = repository.findAllByCompleteFalse(pagination).map(ListingDataProject::new);
+        PagedModel<EntityModel<ListingDataProject>> pagedModel = assembler.toModel(projects);
+
+        return pagedModel;
     }
 
 

@@ -1,5 +1,7 @@
 package br.com.bycoffe.flowes.models.project.dto;
 
+import org.springframework.hateoas.Links;
+
 import br.com.bycoffe.flowes.models.project.Project;
 import br.com.bycoffe.flowes.models.workspace.dto.RelationDataWorkspace;
 import br.com.bycoffe.flowes.utils.deadline.Deadline;
@@ -9,7 +11,8 @@ public record ListingDataProject(
         RelationDataWorkspace workspace,
         String nameProject, 
         Deadline deadline, 
-        String label
+        String label,
+        Links links
     ) {
 
     public ListingDataProject(Project project) {
@@ -18,7 +21,8 @@ public record ListingDataProject(
             new RelationDataWorkspace(project.getWorkspace()),
             project.getName(),
             project.getDeadline(),
-            project.getLabel()
+            project.getLabel(),
+            project.toEntityModel().getLinks()
         );
     }
     

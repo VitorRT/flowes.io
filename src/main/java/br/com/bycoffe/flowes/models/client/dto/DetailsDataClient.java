@@ -3,6 +3,8 @@ package br.com.bycoffe.flowes.models.client.dto;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import org.springframework.hateoas.Links;
+
 import br.com.bycoffe.flowes.models.client.Client;
 
 public record DetailsDataClient(
@@ -11,7 +13,8 @@ public record DetailsDataClient(
     String email,
     LocalDate dataNascimento,
     LocalDateTime createdAt,
-    LocalDateTime updatedAt
+    LocalDateTime updatedAt,
+    Links links
 ) { 
 
     public DetailsDataClient(Client client) {
@@ -21,7 +24,8 @@ public record DetailsDataClient(
             client.getEmail(),
             client.getDataNascimento(),
             client.getCreatedAt(),
-            client.getUpdatedAt()
+            client.getUpdatedAt(),
+            client.toEntityModel().getLinks()
         );
     }
 }

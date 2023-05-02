@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.data.web.PagedResourcesAssembler;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.PagedModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -39,6 +42,9 @@ public class TaskContoller {
     @Autowired
     ProjectRepository projectRepository;
 
+    @Autowired
+    PagedResourcesAssembler<ListingDataTask> assembler;
+
 
     private Task getTask(Long id) {
         return repository.findById(id).orElseThrow(() -> {
@@ -52,11 +58,12 @@ public class TaskContoller {
 
 
     @GetMapping
-    public ResponseEntity<Page<ListingDataTask>> returnClient(@PageableDefault(size = 10) Pageable pagination) {
-        log.info("[ Search ] Buscando Tasks"); 
-        Page<ListingDataTask> pages = repository.findAllByCompleteFalse(pagination).map(ListingDataTask::new);
+    public PagedModel<EntityModel<ListingDataTask>> search(@PageableDefault(size = 10) Pageable pagination) {
+        log.info("[ Search ] Buscando Tasks");
+        Page<ListingDataTask> tasks = repository.findAllByCompleteFalse(pagination).map(ListingDataTask::new);
+        PagedModel<EntityModel<ListingDataTask>> pagedModel = assembler.toModel(tasks);
 
-        return ResponseEntity.ok(pages);
+        return pagedModel;
     }
 
     @PostMapping

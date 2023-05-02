@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.data.web.PagedResourcesAssembler;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.PagedModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -41,6 +44,11 @@ public class WorkspaceController {
 
     @Autowired
     ClientRepository clientRepository;
+    
+    @Autowired
+    PagedResourcesAssembler<ListingDataWorkspace> assembler;
+
+
 
     private Workspace getWorkspace(Long id) {
         return repository.findById(id).orElseThrow(() -> { 
@@ -52,12 +60,14 @@ public class WorkspaceController {
         });
     }
 
-
+   
     @GetMapping
-    public ResponseEntity<Page<ListingDataWorkspace>> returnClient(@PageableDefault(size = 10) Pageable pagination) {
-        log.info("[ Search ] Buscando Workspaces"); 
-        Page<ListingDataWorkspace> pages = repository.findAllByCompleteFalse(pagination).map(ListingDataWorkspace::new);
-        return ResponseEntity.ok(pages);
+    public PagedModel<EntityModel<ListingDataWorkspace>> search(@PageableDefault(size = 10) Pageable pagination) {
+        log.info("[ Search ] Buscando Workspaces");
+        Page<ListingDataWorkspace> workspaces = repository.findAllByCompleteFalse(pagination).map(ListingDataWorkspace::new);
+        PagedModel<EntityModel<ListingDataWorkspace>> pagedModel = assembler.toModel(workspaces);
+
+        return pagedModel;
     }
 
 

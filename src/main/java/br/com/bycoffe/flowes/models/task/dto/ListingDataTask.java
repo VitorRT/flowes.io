@@ -1,5 +1,7 @@
 package br.com.bycoffe.flowes.models.task.dto;
 
+import org.springframework.hateoas.Links;
+
 import br.com.bycoffe.flowes.models.project.dto.RelationDataProject;
 import br.com.bycoffe.flowes.models.task.Task;
 import br.com.bycoffe.flowes.utils.TaskCategory.Category;
@@ -12,7 +14,8 @@ public record ListingDataTask(
     String role,
     String taskLabel,
     DeadlineTask deadlineTask,
-    Category category
+    Category category,
+    Links link
     ) {
     
         public ListingDataTask(Task task) {
@@ -23,7 +26,8 @@ public record ListingDataTask(
                 task.getRole(),
                 task.getTaskLabel(),
                 task.getDeadlineTask(),
-                task.getCategory()
+                task.getCategory(),
+                task.toEntityModel().getLinks()
             );
         }
 }

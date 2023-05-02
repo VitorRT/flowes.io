@@ -2,6 +2,8 @@ package br.com.bycoffe.flowes.models.workspace.dto;
 
 import java.time.LocalDateTime;
 
+import org.springframework.hateoas.Links;
+
 import br.com.bycoffe.flowes.models.client.dto.RelationDataClient;
 import br.com.bycoffe.flowes.models.workspace.Workspace;
 
@@ -13,7 +15,8 @@ public record DetailsDataWorkspace(
     String description,
     String workspaceImage,
     LocalDateTime createdAt,
-    LocalDateTime updatedAt
+    LocalDateTime updatedAt,
+    Links links
 ) {
     public DetailsDataWorkspace(Workspace workspace) {
         this(
@@ -24,7 +27,8 @@ public record DetailsDataWorkspace(
             workspace.getDescription(),
             workspace.getWorkspaceImage(),
             workspace.getCreatedAt(),
-            workspace.getUpdatedAt()
+            workspace.getUpdatedAt(),
+            workspace.toEntityModel().getLinks()
         );
     }
 }

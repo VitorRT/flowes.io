@@ -54,11 +54,11 @@ public class DatabaseSeeder implements CommandLineRunner {
         /** Criando contas dos clientes */
         log.info("[ Seed ] - Semeando clientes...");
         clientRepository.saveAll(List.of(
-            new Client(new RegisterUpdateDataClient("Vitu 🎴", "vitu.barberino@gmail.com", "teste123", LocalDate.of(2004, 3, 24))),
-            new Client(new RegisterUpdateDataClient("Xand", "xand.psobral@gmail.com", "xandin10", LocalDate.of(2004, 3, 10))),
-            new Client(new RegisterUpdateDataClient("ʬ Mirelaah ʬ", "mirelaah.sun@gmail.com", "pugalinda", LocalDate.of(2004, 7, 16))),
-            new Client(new RegisterUpdateDataClient("Hioda Takashi", "hioda.takashi@gmail.com", "kewanforever", LocalDate.of(2004, 3, 24))),
-            new Client(new RegisterUpdateDataClient("Yuu 💕", "yuuh.takashi@gmail.com", "darklove@ever", LocalDate.of(2007, 8, 18)))
+            new Client(new RegisterUpdateDataClient("Vitu 🎴", "vitu.barberino@gmail.com", "teste123" + "@", LocalDate.of(2004, 3, 24))),
+            new Client(new RegisterUpdateDataClient("Xand", "xand.psobral@gmail.com", "xandin10" + "@", LocalDate.of(2004, 3, 10))),
+            new Client(new RegisterUpdateDataClient("ʬ Mirelaah ʬ", "mirelaah.sun@gmail.com", "pugalinda" + "@", LocalDate.of(2004, 7, 16))),
+            new Client(new RegisterUpdateDataClient("Hioda Takashi", "hioda.takashi@gmail.com", "kewanforever" + "@", LocalDate.of(2004, 3, 24))),
+            new Client(new RegisterUpdateDataClient("Yuu 💕", "yuuh.takashi@gmail.com", "darklove@ever" + "@", LocalDate.of(2007, 8, 18)))
         ));
         log.info("[ Seed ] - Semente de clientes plantada!");
         System.out.println("\n");

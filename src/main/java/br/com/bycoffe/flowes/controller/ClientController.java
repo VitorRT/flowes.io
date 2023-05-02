@@ -14,6 +14,7 @@ import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.PagedModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -44,6 +45,10 @@ public class ClientController {
     @Autowired
     PagedResourcesAssembler<ListingDataClient> assembler;
 
+    @Autowired
+    private PasswordEncoder encoder;
+    
+
     /* Método privado para buscar o modelo Client no banco de dados. */
     private Client getClient(Long id) {
         return repository.findById(id).orElseThrow(() -> {
@@ -71,6 +76,7 @@ public class ClientController {
         log.info("[ Create ] Cadastrando Cliente: " + clientDTO.clientName());
 
         Client clientModel = new Client(clientDTO);
+        clientModel.setSenha(encoder.encode(clientDTO.senha()));
         repository.save(clientModel);
         DetailsDataClient client = new DetailsDataClient(clientModel);
 

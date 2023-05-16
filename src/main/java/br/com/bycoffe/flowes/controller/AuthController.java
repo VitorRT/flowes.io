@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.bycoffe.flowes.dto.Token;
 import br.com.bycoffe.flowes.models.client.dto.AuthDataClient;
+import br.com.bycoffe.flowes.service.TokenService;
 import jakarta.validation.Valid;
 
 @RestController
@@ -18,10 +20,14 @@ public class AuthController {
     @Autowired
     private AuthenticationManager manager;
 
+    @Autowired
+    private TokenService tokenService;
+
 
     @PostMapping
-    public ResponseEntity<Object> login (@RequestBody @Valid AuthDataClient credential) {
+    public ResponseEntity<Token> login (@RequestBody @Valid AuthDataClient credential) {
         manager.authenticate(credential.toAuthentication());
-        return ResponseEntity.ok().build();
+        var token = tokenService.generateToken(credential);
+        return ResponseEntity.ok().body(token);
     }
 }

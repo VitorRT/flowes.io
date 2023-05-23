@@ -26,11 +26,9 @@ public class AuthorizationFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws IOException, ServletException {
-        System.out.println("Executando Filtro");
 
         // obter o token header
         var token = getToken(request);
-        System.out.println(token);
 
         // se tiver um token e ele for valido, autenticar
         if(token != null) {
@@ -40,7 +38,6 @@ public class AuthorizationFilter extends OncePerRequestFilter {
                 client.getEmail(), null, client.getAuthorities()
             );
             SecurityContextHolder.getContext().setAuthentication(auth);
-            System.out.println(client);
         }
 
         filterChain.doFilter(request, response);

@@ -29,9 +29,14 @@ import br.com.bycoffe.flowes.models.task.dto.ListingDataTask;
 import br.com.bycoffe.flowes.models.task.dto.RegisterDataTask;
 import br.com.bycoffe.flowes.repository.ProjectRepository;
 import br.com.bycoffe.flowes.repository.TaskRepository;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
 @RequestMapping("/api/v1/task")
+@Tag(name = "Task ✅")
 public class TaskContoller {
     
     Logger log = LoggerFactory.getLogger(TaskContoller.class);
@@ -58,6 +63,14 @@ public class TaskContoller {
 
 
     @GetMapping
+    @Operation(
+        summary = "Listagem de tarefas.",
+        description = "Listagem geral de todas as tarefas cadastradas e ativas."
+    )
+    @ApiResponses( {
+        @ApiResponse(responseCode = "200", description = "Os dados das tarefas foram retornados.")
+    }
+    )
     public PagedModel<EntityModel<ListingDataTask>> search(@PageableDefault(size = 10) Pageable pagination) {
         log.info("[ Search ] Buscando Tasks");
         Page<ListingDataTask> tasks = repository.findAllByCompleteFalse(pagination).map(ListingDataTask::new);
@@ -67,6 +80,15 @@ public class TaskContoller {
     }
 
     @PostMapping
+    @Operation(
+        summary = "Cadastro de uma tarefa.",
+        description = "Cadastro de uma tarefa. Para poder cadastrar é preciso informar o id do projeto."
+    )
+    @ApiResponses( {
+        @ApiResponse(responseCode = "201", description = "A tarefa foi criada com sucesso."),   
+        @ApiResponse(responseCode = "400", description = "Os dados enviados são inválidos.")   
+    }
+    )
     public ResponseEntity<DetailsDataTask> create(@RequestBody RegisterDataTask taskDTO) {
         log.info("[ Create ] Cadastrando Task: " + taskDTO.name()); 
 
@@ -79,6 +101,15 @@ public class TaskContoller {
     }
 
     @GetMapping("{id}")
+    @Operation(
+        summary = "Detalhamento de tarefa.",
+        description = "Detalhamento de uma tarefa cadastrada e ativa. É preciso informar o id da tarefa no path da requisição."
+    )
+    @ApiResponses( {
+        @ApiResponse(responseCode = "200", description = "Os dados da tarefa foram retornados."),   
+        @ApiResponse(responseCode = "400", description = "Não existe uma tarefa com esse ID.")   
+    }
+    )
     public ResponseEntity<DetailsDataTask> show(@PathVariable Long id) {
         log.info("[ Show ] Buscando Task: " + id);
         Task taskEncontrado = getTask(id);
@@ -88,6 +119,15 @@ public class TaskContoller {
     }
 
     @DeleteMapping("{id}")
+    @Operation(
+        summary = "Deleção de tarefa.",
+        description = "Deleção de uma tarefa cadastrada e ativa. É preciso informar o id da tarefa no path da requisição."
+    )
+    @ApiResponses( {
+        @ApiResponse(responseCode = "204", description = "A tarefa foi deletada com sucesso."),   
+        @ApiResponse(responseCode = "400", description = "Não existe uma tarefa com esse ID.")   
+    }
+    )
     public ResponseEntity<DetailsDataTask> destroy(@PathVariable Long id) {
         log.info("[ Destroy ] Apagando Task: " + id);
         Task taskEncontrado = getTask(id);
@@ -96,6 +136,15 @@ public class TaskContoller {
     }
 
     @PutMapping("{id}")
+    @Operation(
+        summary = "Edição de tarefa.",
+        description = "Edição de uma tarefa cadastrada e ativa. É preciso informar o id da tarefa no path da requisição e um corpo na requisição."
+    )
+    @ApiResponses( {
+        @ApiResponse(responseCode = "200", description = "Os dados da tarefa foram retornados."),   
+        @ApiResponse(responseCode = "400", description = "Não existe uma tarefa com esse ID.")   
+    }
+    )
     public ResponseEntity<DetailsDataTask> update(@PathVariable Long id, @RequestBody Task task) {
         log.info("[ Update ] Atualizando Task: " + id);
         Task taskEncontrado = getTask(id);

@@ -24,9 +24,9 @@ public class SecurityConfig {
     public SecurityFilterChain filterChainHandler(HttpSecurity http) throws Exception {
         return http
                 .authorizeHttpRequests()
-                .requestMatchers(HttpMethod.POST, "/api/v1/auth").permitAll()
-                .requestMatchers(HttpMethod.POST, "/api/v1/client").permitAll()
-                .anyRequest().authenticated()
+                .requestMatchers(HttpMethod.POST, "/api/v1/auth", "/api/v1/client").permitAll()
+                .requestMatchers("/v3/api-docs/**", "/swagger-ui/**","/swagger-ui.html").permitAll()
+                    .anyRequest().authenticated()
                 .and()
                 .csrf().disable()
                 .formLogin().disable()

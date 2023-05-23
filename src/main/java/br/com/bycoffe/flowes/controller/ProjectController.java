@@ -31,10 +31,15 @@ import br.com.bycoffe.flowes.models.project.dto.ListingDataProject;
 import br.com.bycoffe.flowes.models.project.dto.RegisterDataProject;
 import br.com.bycoffe.flowes.repository.ProjectRepository;
 import br.com.bycoffe.flowes.repository.WorkspaceRepository;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/v1/project")
+@Tag(name = "Project 📅")
 public class ProjectController {
     
     Logger log = LoggerFactory.getLogger(ProjectController.class);
@@ -61,6 +66,14 @@ public class ProjectController {
 
 
     @GetMapping
+    @Operation(
+        summary = "Listagem de projetos.",
+        description = "Listagem geral de todas os projetos cadastrados e ativos."
+    )
+    @ApiResponses( {
+        @ApiResponse(responseCode = "200", description = "Os dados dos projetos foram retornados.")
+    }
+    )
     public PagedModel<EntityModel<ListingDataProject>> search(@PageableDefault(size = 10) Pageable pagination) {
         log.info("[ Search ] Buscando Projects");
         Page<ListingDataProject> projects = repository.findAllByCompleteFalse(pagination).map(ListingDataProject::new);
@@ -71,6 +84,15 @@ public class ProjectController {
 
 
     @PostMapping
+    @Operation(
+        summary = "Cadastro de projeto.",
+        description = "Cadastro de um projeto. Para poder cadastrar é preciso informar o id da workspace."
+    )
+    @ApiResponses( {
+        @ApiResponse(responseCode = "201", description = "O projeto foi criado com sucesso."),
+        @ApiResponse(responseCode = "400", description = "Os dados enviados são inválidos.")
+    }
+    )
     public ResponseEntity<DetailsDataProject> create(
         @RequestBody @Valid RegisterDataProject projectDTO,
         BindingResult result
@@ -87,6 +109,15 @@ public class ProjectController {
 
 
     @GetMapping("{id}")
+    @Operation(
+        summary = "Detalhamento de projeto.",
+        description = "Detalhamento de um projeto cadastrado e ativo. É preciso informar o id do projeto no path da requisição."
+    )
+    @ApiResponses( {
+        @ApiResponse(responseCode = "200", description = "Os dados do projeto foram retornados."),
+        @ApiResponse(responseCode = "400", description = "Não existe um projeto com esse ID.")
+    }
+    )
     public ResponseEntity<DetailsDataProject> show(@PathVariable Long id) {
 
         log.info("[ Show ] Buscando Project: " + id);
@@ -99,6 +130,15 @@ public class ProjectController {
     }
 
     @DeleteMapping("{id}")
+    @Operation(
+        summary = "Deleção de projeto.",
+        description = "Deleção de um projeto cadastrado e ativo. É preciso informar o id do projeto no path da requisição."
+    )
+    @ApiResponses( {
+        @ApiResponse(responseCode = "204", description = "O projeto foi deletada com sucesso."),
+        @ApiResponse(responseCode = "400", description = "Não existe um projeto com esse ID.")
+    }
+    )
     public ResponseEntity<DetailsDataProject> destroy(@PathVariable Long id) {
 
         log.info("[ Destroy ] Apagando Project: " + id);
@@ -111,6 +151,15 @@ public class ProjectController {
     }
 
     @PutMapping("{id}")
+    @Operation(
+        summary = "Edição de projeto.",
+        description = "Edição de um projeto cadastrado e ativo. É preciso informar o id do projeto no path da requisição e um corpo na requisição."
+    )
+    @ApiResponses( {
+        @ApiResponse(responseCode = "200", description = "Os dados do projeto foram retornados."),
+        @ApiResponse(responseCode = "400", description = "Não existe um projeto com esse ID.")
+    }
+    )
     public ResponseEntity<DetailsDataProject> update(@PathVariable Long id, @RequestBody Project project) {
         log.info("[ Update ] Atualizando Project: " + id);
 

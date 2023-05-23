@@ -31,10 +31,15 @@ import br.com.bycoffe.flowes.models.client.dto.DetailsDataClient;
 import br.com.bycoffe.flowes.models.client.dto.ListingDataClient;
 import br.com.bycoffe.flowes.models.client.dto.RegisterUpdateDataClient;
 import br.com.bycoffe.flowes.repository.ClientRepository;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/v1/client")
+@Tag(name = "Client 🙋🏾‍♂️")
 public class ClientController {
 
     Logger log = LoggerFactory.getLogger(ClientController.class);
@@ -58,8 +63,16 @@ public class ClientController {
         });
     }
 
-    // ResponseEntity<PagedModel<EntityModel<ListingDataClient>>
+    
     @GetMapping
+    @Operation(
+        summary = "Listagem de clientes.",
+        description = "Listagem geral de todas os clientes cadastrados e ativos."
+    )
+    @ApiResponses( {
+        @ApiResponse(responseCode = "200", description = "Os dados dos clientes foram retornados.")
+    }
+    )
     public PagedModel<EntityModel<ListingDataClient>> search(@PageableDefault(size = 10) Pageable pagination) {
         log.info("[ Search ] Buscando Clientes");
         Page<ListingDataClient> clients = repository.findAllByActiveTrue(pagination).map(ListingDataClient::new);
@@ -69,6 +82,15 @@ public class ClientController {
     }
 
     @PostMapping
+    @Operation(
+        summary = "Cadastro de cliente.",
+        description = "Cadastro de um cliente para poder acessar todos os recursos da api. (Esta requisição não precisa de um token.)"
+    )
+    @ApiResponses( {
+        @ApiResponse(responseCode = "201", description = "O cliente foi criado com sucesso."),
+        @ApiResponse(responseCode = "400", description = "Os dados enviados são inválidos.")
+    }
+    )
     public ResponseEntity<DetailsDataClient> create(
             @RequestBody @Valid RegisterUpdateDataClient clientDTO,
             BindingResult result) {
@@ -84,6 +106,15 @@ public class ClientController {
     }
 
     @GetMapping("{id}")
+    @Operation(
+        summary = "Detalhamento de cliente.",
+        description = "Detalhamento de um cliente cadastrado e ativo."
+    )
+    @ApiResponses( {
+        @ApiResponse(responseCode = "200", description = "Os dados do cliente foram retornados."),
+        @ApiResponse(responseCode = "400", description = "Não existe um cliente com esse ID.")
+    }
+    )
     public ResponseEntity<DetailsDataClient> show(@PathVariable Long id) {
 
         log.info("[ Show ] Buscando Cliente: " + id);
@@ -96,6 +127,15 @@ public class ClientController {
     }
 
     @DeleteMapping("{id}")
+    @Operation(
+        summary = "Deleção de cliente.",
+        description = "Deleção de um cliente cadastrado e ativo. É preciso informar o id do cliente no path da requisição."
+    )
+    @ApiResponses( {
+        @ApiResponse(responseCode = "204", description = "O cliente foi deletada com sucesso."),
+        @ApiResponse(responseCode = "400", description = "Não existe um cliente com esse ID.")
+    }
+    )
     public ResponseEntity<Void> destroy(@PathVariable Long id) {
 
         log.info("[ Destroy ] Apagando Cliente: " + id);
@@ -108,6 +148,15 @@ public class ClientController {
     }
 
     @PutMapping("{id}")
+    @Operation(
+        summary = "Edição de cliente.",
+        description = "Edição de um cliente cadastrado e ativo. É preciso informar o id do cliente no path da requisição e um corpo na requisição."
+    )
+    @ApiResponses( {
+        @ApiResponse(responseCode = "200", description = "Os dados do cliente foram retornados."),
+        @ApiResponse(responseCode = "400", description = "Não existe um cliente com esse ID.")
+    }
+    )
     public ResponseEntity<DetailsDataClient> update(
             @PathVariable Long id,
             @RequestBody RegisterUpdateDataClient clientDTO) {

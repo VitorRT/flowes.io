@@ -5,17 +5,17 @@
 	<div style="display: block;">
 	<div style="display: flex; align-items: center; gap: 2em;">
 		Pré-requisitos 
-		<img src="https://uploaddeimagens.com.br/images/004/505/016/full/n.png?1686669721" style="width: 50px; height: 50px;" />
+		<img src="https://uploaddeimagens.com.br/images/004/505/016/full/n.png?1686669721" style="width: 30px; height: 30px;" />
 	</div>
 		- Java; <br/>
 		- Spring; <br/>
 		- Gradle(ou Maven); <br/>
-		- Docker(desejável); <br/>
+		- Docker(desejável); <br/> <br/> <br/>
 	</div>
     <div style="display: block;">
 		Percurso <br/>
 		- Etapa 1 - Programação reativa <br/>
-		- Etapa 2 - Spring WebFlux <br/>
+		- Etapa 2 - Spring WebFlux <br/> <br/>
    </div>
 </div>
 <hr />

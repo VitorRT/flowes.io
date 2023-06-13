@@ -3,9 +3,9 @@
 	
 <div style="display: block;">
 	<div style="display: block;">
-	<div style="display: flex;">
+	<div style="display: flex; align-items: center; gap: 2em;">
 		Pré-requisitos 
-		<img src="https://uploaddeimagens.com.br/images/004/504/971/full/png-clipart-yui-hirasawa-k-on-mio-akiyama-anime-kavaii-anime-girl-child-face-thumbnail.png?1686668750" style="width: 50px; height: 50px;" />
+		<img src="https://uploaddeimagens.com.br/images/004/505/016/full/n.png?1686669721" style="width: 50px; height: 50px;" />
 	</div>
 		- Java;
 		- Spring;

@@ -1,4 +1,100 @@
 
+# Fundamentos de programação reativa com Reactor e Spring WebFlux (Java) ☕🔃
+	
+<div style="display: block;">
+	<div style="display: block;">
+	<div style="display: flex;">
+		Pré-requisitos 
+		<img src="https://uploaddeimagens.com.br/images/004/504/971/full/png-clipart-yui-hirasawa-k-on-mio-akiyama-anime-kavaii-anime-girl-child-face-thumbnail.png?1686668750" style="width: 50px; height: 50px;" />
+	</div>
+		- Java;
+		- Spring;
+		- Gradle(ou Maven);
+		- Docker(desejável);
+	</div>
+    <div style="display: block;">
+		Percurso
+		- Etapa 1 - Programação reativa
+		- Etapa 2 - Spring WebFlux
+   </div>
+</div>
+<hr />
+
+# Etapa 1 - Programação reativa
+_É um paradigma de programação onde temos os nossos dados sendo transmitidos por um fluxo de dados (Streams) que geralmente são assíncronos e os dados são transmitidos para um ou mais Observers (observadores) o paradigma de programação reativa é baseado no pattern observable._
+
+### Vantagens
+ - Aplicação mais escalável;
+ - Mecanismos mais robustos e flexíveis para tratamento de exceções;
+
+### Desvantagens
+ - Curva de aprendizado;
+ - Complexidade em lidar com logs;
+
+
+## Quando usar a arquitetura reativa?
+_É importante saber quando usar a programação reativa, por justamente abordar um outro estilo de programação e uma outra forma de pensar. Quando a aplicação receberá muitas requisições em um curto espaço de tempo, a programação reativa é interessante, em uma aplicação que não possui tanta demanda de requisição a programação reativa também vai bem, mas lembre-se sempre dos riscos que você estará correndo._
+
+<hr />
+
+# Manifesto Reativo
+_Em 2014 um grupo de desenvolvedores criaram uma segunda versão desse manifesto com 4 pilares que indicam se uma aplicação é reativa. (qualquer linguagem)_
+
+## Pilares do manifesto
+ - **Responsividade**: Capacidade da aplicação responder rápido as requisições;
+ - **Resiliência**: Capacidade de lidar com falhas e comportamentos inesperados de componentes;
+ - **Elasticidade**: Capacidade de manter os 2 pilares anteriores em situações de processamento de grandes quantidades de dados e de voltar à configuração inicial posteriormente;
+ - **Guiado por mensagem**: Aplicação se baseia na troca de mensagens entre os componentes de forma assíncrona;
+
+
+
+# Etapa 2 - Spring WebFlux
+
+_Módulo inserido no Spring Framework na versão 5 baseado no projeto Reactor para a criação de aplicações não bloqueantes na JVM(Assóncrono)._
+_Para aproveitarmos ao máximo do ambiente assíncrono temos a nossa disposição algumas ferramentas/módulos que também trabalham dessa forma._
+
+## Formas de desenvolvimento
+ - Seguindo a forma tradicional usando annotations;
+ - Novo estilo funcional usando o Handler e o Router;
+
+Vamos utilizar a forma tradicional com as annotations, porém existe a outra nova forma de se desenvolver uma aplicação com o spring web flux.
+
+## Links Úteis
+ - [Repositório no Github 👨🏾‍💻]()
+-   [Documentação Oficial 📝](https://docs.spring.io/spring-framework/docs/current/reference/html/web-reactive.htm)
+- [Manifesto Reativo 🧾](https://www.reactivemanifesto.org)
+> Doc by: VitorRT 💌
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!-- Nome do projeto -->
 # flowes.io 🌻
 <img src="https://i.ibb.co/SwnFYc1/Inserir-um-subt-tulo.png" alt="flowes_icon" style="border-radius: 10px"/>

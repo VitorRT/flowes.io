@@ -7,15 +7,15 @@
 		Pré-requisitos 
 		<img src="https://uploaddeimagens.com.br/images/004/505/016/full/n.png?1686669721" style="width: 50px; height: 50px;" />
 	</div>
-		- Java;
-		- Spring;
-		- Gradle(ou Maven);
-		- Docker(desejável);
+		- Java; <br/>
+		- Spring; <br/>
+		- Gradle(ou Maven); <br/>
+		- Docker(desejável); <br/>
 	</div>
     <div style="display: block;">
-		Percurso
-		- Etapa 1 - Programação reativa
-		- Etapa 2 - Spring WebFlux
+		Percurso <br/>
+		- Etapa 1 - Programação reativa <br/>
+		- Etapa 2 - Spring WebFlux <br/>
    </div>
 </div>
 <hr />

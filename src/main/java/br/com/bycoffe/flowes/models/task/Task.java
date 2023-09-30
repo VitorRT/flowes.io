@@ -6,7 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 
-import br.com.bycoffe.flowes.controller.TaskContoller;
+import br.com.bycoffe.flowes.controller.task.impl.TaskContoller;
 import br.com.bycoffe.flowes.models.project.Project;
 import br.com.bycoffe.flowes.models.task.dto.RegisterDataTask;
 import br.com.bycoffe.flowes.models.task.dto.UpdateDataTask;

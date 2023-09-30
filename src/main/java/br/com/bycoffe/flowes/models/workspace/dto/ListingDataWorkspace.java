@@ -11,17 +11,17 @@ public record ListingDataWorkspace(
         Long id,
         RelationDataClient client,
         String name,
-        LocalDateTime deadline,
         String workspaceImage,
+        LocalDateTime createdAt,
         Links links) {
 
     public ListingDataWorkspace(Workspace workspace) {
         this(
                 workspace.getId(),
-                new RelationDataClient(workspace.getClient()),
+                new RelationDataClient(workspace.getClient()),  
                 workspace.getName(),
-                workspace.getDeadline(),
                 workspace.getWorkspaceImage(),
+                workspace.getCreatedAt(),
                 workspace.toEntityModel().getLinks());
     }
 }

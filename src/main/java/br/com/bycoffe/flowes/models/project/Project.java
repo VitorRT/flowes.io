@@ -6,7 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 
-import br.com.bycoffe.flowes.controller.ProjectController;
+import br.com.bycoffe.flowes.controller.project.impl.ProjectControllerImpl;
 import br.com.bycoffe.flowes.models.project.dto.RegisterDataProject;
 import br.com.bycoffe.flowes.models.project.dto.UpdateDataProject;
 import br.com.bycoffe.flowes.models.workspace.Workspace;
@@ -84,9 +84,9 @@ public class Project {
 
     public EntityModel<Project> toEntityModel() {
         return EntityModel.of(this,
-            WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(ProjectController.class).show(id)).withSelfRel(),
-            WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(ProjectController.class).destroy(id)).withRel("delete"),
-            WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(ProjectController.class).search(Pageable.unpaged())).withRel("all")
+            WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(ProjectControllerImpl.class).show(id)).withSelfRel(),
+            WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(ProjectControllerImpl.class).destroy(id)).withRel("delete"),
+            WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(ProjectControllerImpl.class).search(Pageable.unpaged())).withRel("all")
         );
     }
 

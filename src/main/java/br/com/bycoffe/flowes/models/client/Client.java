@@ -12,7 +12,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import br.com.bycoffe.flowes.controller.ClientController;
+import br.com.bycoffe.flowes.controller.client.impl.ClientControllerImpl;
 import br.com.bycoffe.flowes.models.client.dto.RegisterUpdateDataClient;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -74,10 +74,10 @@ public class Client implements UserDetails {
 
     public EntityModel<Client> toEntityModel() {
         return EntityModel.of(this,
-                WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(ClientController.class).show(id)).withSelfRel(),
-                WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(ClientController.class).destroy(id))
+                WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(ClientControllerImpl.class).show(id)).withSelfRel(),
+                WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(ClientControllerImpl.class).destroy(id))
                         .withRel("delete"),
-                WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(ClientController.class).search(Pageable.unpaged()))
+                WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(ClientControllerImpl.class).search(Pageable.unpaged()))
                         .withRel("all"));
     }
 

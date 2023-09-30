@@ -15,10 +15,6 @@ public record RegisterDataWorkspace(
     @NotBlank
     String name,
 
-    @NotNull
-    @FutureOrPresent
-    LocalDateTime deadline,
-
     String description,
 
     String workspaceImage

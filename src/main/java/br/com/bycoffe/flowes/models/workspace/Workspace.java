@@ -6,7 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 
-import br.com.bycoffe.flowes.controller.WorkspaceController;
+import br.com.bycoffe.flowes.controller.workspace.impl.WorkspaceControllerImpl;
 import br.com.bycoffe.flowes.models.client.Client;
 import br.com.bycoffe.flowes.models.workspace.dto.RegisterDataWorkspace;
 import br.com.bycoffe.flowes.models.workspace.dto.UpdateDataWorkspace;
@@ -30,8 +30,6 @@ public class Workspace {
     private Client client;
 
     private String name;
-
-    private LocalDateTime deadline;
 
     private String description;
 
@@ -58,7 +56,6 @@ public class Workspace {
     public Workspace(RegisterDataWorkspace workspaceDTO) {
         this.client = workspaceDTO.client();
         this.name = workspaceDTO.name();
-        this.deadline = workspaceDTO.deadline();
         this.description = workspaceDTO.description() == null ? "Minha área de trabalho!" : workspaceDTO.description();
         this.workspaceImage = workspaceDTO.workspaceImage() == null ? "default_unknow.png" : workspaceDTO.workspaceImage();
         this.createdAt = LocalDateTime.now();
@@ -68,7 +65,6 @@ public class Workspace {
 
     public Workspace(UpdateDataWorkspace workspaceDTO) {
         this.name = workspaceDTO.name();
-        this.deadline = workspaceDTO.deadline();
         this.description = workspaceDTO.description();
         this.workspaceImage = workspaceDTO.workspaceImage();
         this.createdAt = LocalDateTime.now();
@@ -84,9 +80,9 @@ public class Workspace {
 
     public EntityModel<Workspace> toEntityModel() {
         return EntityModel.of(this,
-            WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(WorkspaceController.class).show(id)).withSelfRel(),
-            WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(WorkspaceController.class).destroy(id)).withRel("delete"),
-            WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(WorkspaceController.class).search(Pageable.unpaged())).withRel("all")
+            WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(WorkspaceControllerImpl.class).show(id)).withSelfRel(),
+            WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(WorkspaceControllerImpl.class).destroy(id)).withRel("delete"),
+            WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(WorkspaceControllerImpl.class).search(Pageable.unpaged())).withRel("all")
         );
     }
 }

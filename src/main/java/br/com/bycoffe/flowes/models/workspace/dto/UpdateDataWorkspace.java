@@ -7,13 +7,8 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 public record UpdateDataWorkspace(
-
     @NotBlank
     String name,
-
-    @NotNull
-    @FutureOrPresent
-    LocalDateTime deadline,
 
     String description,
 
